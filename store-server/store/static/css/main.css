@@ -1589,7 +1589,7 @@ h1, h2, h3, h4, h5, h6 {
 .exclusive-deal-area {
   background: #f9f9ff; }
   .exclusive-deal-area .exclusive-left {
-    position: realtive;
+    position: relative;
     background: url(../img/exclusive.jpg) center no-repeat;
     background-size: cover;
     text-align: center;
