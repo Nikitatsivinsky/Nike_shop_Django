@@ -21,7 +21,7 @@ import shop.views as shop
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', shop.index, name='Main'),
-    path('cart.html/', shop.cart, name='Cart'),
+    path('cart/', shop.cart, name='Cart'),
     path('category/', shop.category, name='Category'),
     path('checkout/', shop.checkout, name='Checkout'),
     path('confirmation/', shop.confirmation, name='Сonfirmation'),
