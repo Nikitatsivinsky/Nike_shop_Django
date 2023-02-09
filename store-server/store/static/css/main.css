@@ -995,7 +995,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .sticky-wrapper {
   position: absolute;
-  top: 40px;
+  top: 5px;
   width: 100%; }
   @media (max-width: 991px) {
     .sticky-wrapper {
@@ -1025,12 +1025,12 @@ h1, h2, h3, h4, h5, h6 {
     background: #fff;
     padding: 0px;
     border: 0px;
-    border-radius: 0px; }
+    border-radius: 45px; }
     @media (max-width: 991px) {
       .header_area .navbar .navbar-collapse {
         margin-top: 30px; }
         .header_area .navbar .navbar-collapse .nav-item {
-          padding: 10px; } }
+          padding: 0px; } }
     .header_area .navbar .navbar-toggler .icon-bar {
       color: #000;
       height: 2px;
@@ -1050,7 +1050,7 @@ h1, h2, h3, h4, h5, h6 {
         color: #222222; }
         @media (min-width: 991px) {
           .header_area .navbar .nav .nav-item .nav-link {
-            padding: 10px 0; } }
+            padding: 0px 0; } }
         .header_area .navbar .nav .nav-item .nav-link:after {
           display: none; }
       .header_area .navbar .nav .nav-item:hover .nav-link, .header_area .navbar .nav .nav-item.active .nav-link {
