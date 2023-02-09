@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
-from apps.shop.views import index, category, single_product, contact, elements
+from apps.shop.views import index, category, single_product
 from apps.auth.views import checkout, login
 from apps.orders.views import cart, confirmation, tracking
+from apps.other.views import contact, elements
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'apps.auth',
     'apps.orders',
     'apps.shop',
+    'apps.other',
+
 ]
 
 MIDDLEWARE = [
@@ -60,7 +63,9 @@ ROOT_URLCONF = "store.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / 'templates',
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

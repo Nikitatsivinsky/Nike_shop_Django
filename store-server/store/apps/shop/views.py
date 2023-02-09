@@ -59,11 +59,3 @@ def category(request):
 
 def single_product(request):
     return render(request, 'shop/single-product.html')
-
-
-def contact(request):
-    return render(request, 'shop/contact.html')
-
-
-def elements(request):
-    return render(request, 'shop/elements.html')

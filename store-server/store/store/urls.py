@@ -19,6 +19,7 @@ from django.urls import path
 import apps.shop.views as shop
 import apps.auth.views as auth
 import apps.orders.views as orders
+import apps.other.views as other
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,8 +28,8 @@ urlpatterns = [
     path('category/', shop.category, name='Category'),
     path('checkout/', auth.checkout, name='Checkout'),
     path('confirmation/', orders.confirmation, name='Сonfirmation'),
-    path('contact/', shop.contact, name='Сontact'),
-    path('elements/', shop.elements, name='elements'),
+    path('contact/', other.contact, name='Сontact'),
+    path('elements/', other.elements, name='elements'),
     path('login/', auth.login, name='Login'),
     path('single-product/', shop.single_product, name='Single Product'),
     path('tracking/', orders.tracking, name='Tracking')

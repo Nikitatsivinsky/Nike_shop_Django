@@ -1,0 +1,140 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block related-product %}
+<!-- Start related-product Area -->
+    <section class="related-product-area section_gap_bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <div class="section-title">
+                    <h1>Найпопулярніші</h1>
+                    <p>Найпопулярніші товари зі скидкою.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r1.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">KD Trey 5 X</a>
+                                <div class="price">
+                                    <h6>$189.00</h6>
+                                    <h6 class="l-through">$210.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r2.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Nike Dunk High Retro SE</a>
+                                <div class="price">
+                                    <h6>$239.00</h6>
+                                    <h6 class="l-through">$310.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r3.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Nike Air Force 1 LV8</a>
+                                <div class="price">
+                                    <h6>$219.00</h6>
+                                    <h6 class="l-through">$250.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r5.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Nike Air Max Penny</a>
+                                <div class="price">
+                                    <h6>$149.00</h6>
+                                    <h6 class="l-through">$250.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r6.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Nike Air Trainer SC High</a>
+                                <div class="price">
+                                    <h6>$129.00</h6>
+                                    <h6 class="l-through">$190.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r7.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Air Jordan 11 CMFT Low</a>
+                                <div class="price">
+                                    <h6>$119.00</h6>
+                                    <h6 class="l-through">$230.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r9.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Nike Air Max 95 N7</a>
+                                <div class="price">
+                                    <h6>$199.00</h6>
+                                    <h6 class="l-through">$220.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r10.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="/single-product" class="title">Nike LeBron XX</a>
+                                <div class="price">
+                                    <h6>$289.00</h6>
+                                    <h6 class="l-through">$310.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-related-product d-flex">
+                            <a href="/single-product"><img src="{% static 'img/r11.jpg' %}" alt=""></a>
+                            <div class="desc">
+                                <a href="s/single-product" class="title">Nike Free Metcon 4</a>
+                                <div class="price">
+                                    <h6>$229.00</h6>
+                                    <h6 class="l-through">$280.00</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ctg-right">
+                    <a href="/category" target="_blank">
+                        <img class="img-fluid d-block mx-auto" src="{% static 'img/category/c5.jpg' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End related-product Area -->
+{% endblock %}
