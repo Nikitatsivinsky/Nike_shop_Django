@@ -16,18 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-import shop.views as shop
+import apps.shop.views as shop
+import apps.auth.views as auth
+import apps.orders.views as orders
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', shop.index, name='Main'),
-    path('cart/', shop.cart, name='Cart'),
+    path('cart/', orders.cart, name='Cart'),
     path('category/', shop.category, name='Category'),
-    path('checkout/', shop.checkout, name='Checkout'),
-    path('confirmation/', shop.confirmation, name='Сonfirmation'),
+    path('checkout/', auth.checkout, name='Checkout'),
+    path('confirmation/', orders.confirmation, name='Сonfirmation'),
     path('contact/', shop.contact, name='Сontact'),
     path('elements/', shop.elements, name='elements'),
-    path('login/', shop.login, name='Login'),
+    path('login/', auth.login, name='Login'),
     path('single-product/', shop.single_product, name='Single Product'),
-    path('tracking/', shop.tracking, name='Tracking')
+    path('tracking/', orders.tracking, name='Tracking')
 ]
