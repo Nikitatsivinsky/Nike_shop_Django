@@ -1,8 +1,13 @@
 {%  extends 'base.html' %}
 {% load static %}
 
-{% block related-product %}
-<!-- Start related-product Area -->
+{% block page_content %}
+
+    <!-- Start shop-page Area -->
+    {% block page %}{% endblock %}
+    <!-- Start shop-page Area -->
+
+    <!-- Start most-famous-product Area -->
     <section class="related-product-area section_gap_bottom">
     <div class="container">
         <div class="row justify-content-center">
@@ -135,6 +140,7 @@
             </div>
         </div>
     </div>
-</section>
-<!-- End related-product Area -->
+    </section>
+    <!-- End related-product Area -->
+
 {% endblock %}
