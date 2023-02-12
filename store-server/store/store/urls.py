@@ -23,14 +23,14 @@ import apps.other.views as other
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', shop.index, name='Main'),
-    path('cart/', orders.cart, name='Cart'),
-    path('category/', shop.category, name='Category'),
-    path('checkout/', auth.checkout, name='Checkout'),
-    path('confirmation/', orders.confirmation, name='Сonfirmation'),
-    path('contact/', other.contact, name='Сontact'),
+    path('', shop.index, name='index'),
+    path('cart/', orders.cart, name='basket'),
+    path('category/', shop.category, name='category'),
+    path('checkout/', auth.checkout, name='checkout'),
+    path('confirmation/', orders.confirmation, name='conformation'),
+    path('contact/', other.contact, name='contact'),
     path('elements/', other.elements, name='elements'),
-    path('login/', auth.login, name='Login'),
-    path('single-product/', shop.single_product, name='Single Product'),
-    path('tracking/', orders.tracking, name='Tracking')
+    path('login/', auth.login, name='login'),
+    path('single-product/', shop.single_product, name='single_product'),
+    path('tracking/', orders.tracking, name='tracking')
 ]
