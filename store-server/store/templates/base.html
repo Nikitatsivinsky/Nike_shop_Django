@@ -32,6 +32,7 @@
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css'%}">
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css'%}">
 	<link rel="stylesheet" href="{% static 'css/main.css'%}">
+
 </head>
 
 <body>
@@ -75,6 +76,7 @@
 							<li class="nav-item"><a class="nav-link" href="/contact">Контакти</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="{% url 'registration' %}" class="cart"><span class="ti-user"></span></a></li>
 							<li class="nav-item"><a href="{% url 'basket' %}" class="cart"><span class="ti-bag"></span></a></li>
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>

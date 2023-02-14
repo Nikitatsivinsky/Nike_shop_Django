@@ -32,5 +32,6 @@ urlpatterns = [
     path('elements/', other.elements, name='elements'),
     path('login/', auth.login, name='login'),
     path('single-product/', shop.single_product, name='single_product'),
-    path('tracking/', orders.tracking, name='tracking')
+    path('tracking/', orders.tracking, name='tracking'),
+    path('registration/', auth.registration, name='registration'),
 ]

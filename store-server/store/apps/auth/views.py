@@ -8,3 +8,6 @@ def checkout(request):
 
 def login(request):
     return render(request, 'auth/login.html')
+
+def registration(request):
+    return render(request, 'auth/register.html')
