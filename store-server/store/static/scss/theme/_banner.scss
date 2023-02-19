@@ -1,10 +1,12 @@
 /* banner area css
 ============================================================================================ */
 .banner-area {
-	background: url(../../img/banner/banner-bg.jpg) center no-repeat;
+	background: url(../img/banner/banner-bg.jpg) center no-repeat;
 	background-size: cover;
 	position: relative;
 	.fullscreen {
+		height: 1150px !important;
+
 		@media (max-width: 768px) {
 			height: 650px !important;
 		}
@@ -88,7 +90,7 @@
 //------- Start Bread Crumb --------//
 
 .organic-breadcrumb {
-	background: url(../../img/banner/common-banner.jpg) center no-repeat;
+	background: url(../img/banner/common-banner.jpg) center no-repeat;
 	background-size: cover;
 	padding-top: 130px;
 	@media (max-width: 991px) {
@@ -105,7 +107,7 @@
 	}
 }
 .breadcrumb-banner {
-	padding: 90px 0 100px 0;
+	padding: 20px 0 30px 0;
 	h1 {
 		font-weight: 600;
 		color: $white;
@@ -129,9 +131,9 @@
 		}
 	}
 	.col-first {
-		padding-right: 15px;
+		padding-right: 45px;
 		@media (max-width: 1680px) {
-			padding-right: 40px;
+			padding-right: 70px;
 		}
 		@media (max-width: 991px) {
 			width: 48%;
