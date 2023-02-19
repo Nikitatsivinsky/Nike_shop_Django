@@ -3,3 +3,8 @@
 /.idea/Nike_shop_Django.iml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
+/store-server/store/apps/
+/store-server/store/store/
+*.log
+*.sqlite3
+*.py
