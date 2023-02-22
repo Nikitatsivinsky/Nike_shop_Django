@@ -1,254 +1,322 @@
-{%  extends 'shop/shop_base.html' %}
-{% load static %}
-
-
-{% block page %}
+{% extends 'shop/shop_base.html' %} {% load static %} {% block page %}
 <!-- start banner Area -->
 <section class="banner-area">
-    <div class="container">
-        <div class="row fullscreen align-items-center justify-content-start">
-            <div class="col-lg-12">
-                <div class="active-banner-slider owl-carousel">
-                    <!-- single-slide -->
-                    {% for banner_shoes in banner %}
-                    <div class="row single-slide align-items-center d-flex">
-                        <div class="col-lg-5 col-md-6">
-                            <div class="banner-content">
-                                <h1>{{ banner_shoes.name_shoes }}<br>{{ banner_shoes.name_model }}</h1>
-                                <p>{{ banner_shoes.description }}</p>
-                                <div class="add-bag d-flex align-items-center">
-                                    <a class="add-btn" href="{% url 'basket' %}"><span class="lnr lnr-cross"></span></a>
-                                    <span class="add-text text-uppercase">Додати до кошика</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="banner-img">
-                                <img class="img-fluid" src="{% static banner_shoes.image_link %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+  <div class="container">
+    <div class="row fullscreen align-items-center justify-content-start">
+      <div class="col-lg-12">
+        <div class="active-banner-slider owl-carousel">
+          <!-- single-slide -->
+          {% for banner_shoes in banner %}
+          <div class="row single-slide align-items-center d-flex">
+            <div class="col-lg-5 col-md-6">
+              <div class="banner-content">
+                <h1>
+                  {{ banner_shoes.name_shoes }}<br />{{ banner_shoes.name_model}}
+                </h1>
+                <p>{{ banner_shoes.description }}</p>
+                <div class="add-bag d-flex align-items-center">
+                  <a
+                    class="add-btn"
+                    href="{% url 'basket' %}"
+                    ><span class="lnr lnr-cross"></span
+                  ></a>
+                  <span class="add-text text-uppercase">Додати до кошика</span>
                 </div>
+              </div>
             </div>
+            <div class="col-lg-7">
+              <div class="banner-img">
+                <img
+                  class="img-fluid"
+                  src="{% static banner_shoes.image_link %}"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          {% endfor %}
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- End banner Area -->
 
 <!-- start features Area -->
 <section class="features-area section_gap">
-    <div class="container">
-        <div class="row features-inner">
-            <!-- features -->
-            {% for features in features %}
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="single-features">
-                    <div class="f-icon">
-                        <img src="{% static features.link_feature %}" alt="">
-                    </div>
-                    <h6>{{ features.name_feature }}</h6>
-                    <p>{{ features.description_futures }}</p>
-                </div>
-            </div>
-            {% endfor %}
+  <div class="container">
+    <div class="row features-inner">
+      <!-- features -->
+      {% for features in features %}
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="single-features">
+          <div class="f-icon">
+            <img
+              src="{% static features.link_feature %}"
+              alt=""
+            />
+          </div>
+          <h6>{{ features.name_feature }}</h6>
+          <p>{{ features.description_futures }}</p>
         </div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
 <!-- end features Area -->
 
 <!-- Start category Area -->
 <section class="category-area">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    {% for category in category %}
-                    <div class={{ category.class }}>
-                        <div class="single-deal">
-                            <div class="overlay"></div>
-                            <img class="img-fluid w-100" src="{% static category.link_photo %}" alt="">
-                            <a href="{% url 'single_product' %}" class="prd-bottom" target="_blank">
-                                <div class="deal-details">
-                                    <h6 class="deal-title">{{ category.name }}</h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    {% endfor %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-12">
+        <div class="row">
+          {% for category in category %}
+          <div class="category.class">
+            <div class="single-deal">
+              <div class="overlay"></div>
+              <img
+                class="img-fluid w-100"
+                src="{% static category.link_photo %}"
+                alt=""
+              />
+              <a
+                href="{% url 'single_product' %}"
+                class="prd-bottom"
+                target="_blank"
+              >
+                <div class="deal-details">
+                  <h6 class="deal-title">{{ category.name }}</h6>
                 </div>
+              </a>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-deal">
-                    <div class="overlay"></div>
-                    <img class="img-fluid w-100" src="{% static sales.link_photo %}" alt="">
-                    <a href="{% url 'category' %}" class="prd-bottom" target="_blank">
-                        <div class="deal-details">
-                            <h6 class="deal-title">{{ sales.name }}</h6>
-                        </div>
-                    </a>
-                </div>
-            </div>
+          </div>
+          {% endfor %}
         </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="single-deal">
+          <div class="overlay"></div>
+          <img
+            class="img-fluid w-100"
+            src="{% static sales.link_photo %}"
+            alt=""
+          />
+          <a
+            href="{% url 'category' %}"
+            class="prd-bottom"
+            target="_blank"
+          >
+            <div class="deal-details">
+              <h6 class="deal-title">{{ sales.name }}</h6>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- End category Area -->
 
 <!-- start product Area -->
 <section class="owl-carousel active-product-area section_gap">
-<!-- single product slide -->
-    <div class="single-product-slider">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <div class="section-title">
-                        <h1>{{ product_slider_new.name_slide.title }}</h1>
-                        <p>{{ product_slider_new.name_slide.discription }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- single product -->
-                {% for product in product_slider_new.shoes %}
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <img class="img-fluid" src="{% static product.link_photo %}" alt="">
-                        <div class="product-details">
-                            <h6>{{ product.name }}</h6>
-                            <div class="price">
-                                <h6>{{ product.price }}</h6>
-                            </div>
-                            <div class="prd-bottom">
-                                <a href="{% url 'basket' %}" class="social-info">
-                                    <span class="ti-bag"></span>
-                                    <p class="hover-text">Кошик</p>
-                                </a>
-                                <a href="{% url 'single_product' %}" class="social-info">
-                                    <span class="lnr lnr-move"></span>
-                                    <p class="hover-text">Подробиці</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+  <!-- single product slide -->
+  <div class="single-product-slider">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+          <div class="section-title">
+            <h1>{{ product_slider_new.name_slide.title }}</h1>
+            <p>{{ product_slider_new.name_slide.discription }}</p>
+          </div>
         </div>
-    </div>
-    <!-- single product slide -->
-    <div class="single-product-slider">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <div class="section-title">
-                        <h1>{{ product_slider_sale.name_slide.title }}</h1>
-                        <p>{{ product_slider_sale.name_slide.discription }}</p>
-                    </div>
-                </div>
+      </div>
+      <div class="row">
+        <!-- single product -->
+        {% for product in product_slider_new.shoes %}
+        <div class="col-lg-3 col-md-6">
+          <div class="single-product">
+            <img
+              class="img-fluid"
+              src="{% static product.link_photo %}"
+              alt=""
+            />
+            <div class="product-details">
+              <h6>{{ product.name }}</h6>
+              <div class="price">
+                <h6>{{ product.price }}</h6>
+              </div>
+              <div class="prd-bottom">
+                <a
+                  href="{% url 'basket' %}"
+                  class="social-info"
+                >
+                  <span class="ti-bag"></span>
+                  <p class="hover-text">Кошик</p>
+                </a>
+                <a
+                  href="{% url 'single_product' %}"
+                  class="social-info"
+                >
+                  <span class="lnr lnr-move"></span>
+                  <p class="hover-text">Подробиці</p>
+                </a>
+              </div>
             </div>
-            <div class="row">
-                <!-- single product -->
-                {% for product in product_slider_sale.shoes %}
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <img class="img-fluid" src="{% static product.link_photo %}" alt="">
-                        <div class="product-details">
-                            <h6>{{ product.name }}</h6>
-                            <div class="price">
-                                <h6>{{ product.discount_price }}</h6>
-                                <h6 class="l-through">{{ product.price }}</h6>
-                            </div>
-                            <div class="prd-bottom">
-
-                                <a href="{% url 'basket' %}" class="social-info">
-                                    <span class="ti-bag"></span>
-                                    <p class="hover-text">Кошик</p>
-                                </a>
-                                <a href="{% url 'single_product' %}" class="social-info">
-                                    <span class="lnr lnr-move"></span>
-                                    <p class="hover-text">Подробиці</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+          </div>
         </div>
+        {% endfor %}
+      </div>
     </div>
+  </div>
+  <!-- single product slide -->
+  <div class="single-product-slider">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+          <div class="section-title">
+            <h1>{{ product_slider_sale.name_slide.title }}</h1>
+            <p>{{ product_slider_sale.name_slide.discription }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- single product -->
+        {% for product in product_slider_sale.shoes %}
+        <div class="col-lg-3 col-md-6">
+          <div class="single-product">
+            <img
+              class="img-fluid"
+              src="{% static product.link_photo %}"
+              alt=""
+            />
+            <div class="product-details">
+              <h6>{{ product.name }}</h6>
+              <div class="price">
+                <h6>{{ product.discount_price }}</h6>
+                <h6 class="l-through">{{ product.price }}</h6>
+              </div>
+              <div class="prd-bottom">
+                <a
+                  href="{% url 'basket' %}"
+                  class="social-info"
+                >
+                  <span class="ti-bag"></span>
+                  <p class="hover-text">Кошик</p>
+                </a>
+                <a
+                  href="{% url 'single_product' %}"
+                  class="social-info"
+                >
+                  <span class="lnr lnr-move"></span>
+                  <p class="hover-text">Подробиці</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </section>
 <!-- end product Area -->
 
 <!-- Start exclusive deal Area -->
 <section class="exclusive-deal-area">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-6 no-padding exclusive-left">
-                <div class="row clock_sec clockdiv" id="clockdiv">
-                    <div class="col-lg-12">
-                        <h1>{{ exclusive.deal.title}}</h1>
-                        <p>{{ exclusive.deal.description}}</p>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="row clock-wrap">
-                            <div class="col clockinner1 clockinner">
-                                <h1 class="days">{{ exclusive.deal.days}}</h1>
-                                <span class="smalltext">Днів</span>
-                            </div>
-                            <div class="col clockinner clockinner1">
-                                <h1 class="hours">{{ exclusive.deal.hours}}</h1>
-                                <span class="smalltext">Годин</span>
-                            </div>
-                            <div class="col clockinner clockinner1">
-                                <h1 class="minutes">{{ exclusive.deal.minutes}}</h1>
-                                <span class="smalltext">Мінут</span>
-                            </div>
-                            <div class="col clockinner clockinner1">
-                                <h1 class="seconds">{{ exclusive.deal.sec}}</h1>
-                                <span class="smalltext">Секунд</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="{% url 'category' %}" class="primary-btn">Весь товар</a>
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-6 no-padding exclusive-left">
+        <div
+          class="row clock_sec clockdiv"
+          id="clockdiv"
+        >
+          <div class="col-lg-12">
+            <h1>{{ exclusive.deal.title}}</h1>
+            <p>{{ exclusive.deal.description}}</p>
+          </div>
+          <div class="col-lg-12">
+            <div class="row clock-wrap">
+              <div class="col clockinner1 clockinner">
+                <h1 class="days">{{ exclusive.deal.days}}</h1>
+                <span class="smalltext">Днів</span>
+              </div>
+              <div class="col clockinner clockinner1">
+                <h1 class="hours">{{ exclusive.deal.hours}}</h1>
+                <span class="smalltext">Годин</span>
+              </div>
+              <div class="col clockinner clockinner1">
+                <h1 class="minutes">{{ exclusive.deal.minutes}}</h1>
+                <span class="smalltext">Мінут</span>
+              </div>
+              <div class="col clockinner clockinner1">
+                <h1 class="seconds">{{ exclusive.deal.sec}}</h1>
+                <span class="smalltext">Секунд</span>
+              </div>
             </div>
-            <div class="col-lg-6 no-padding exclusive-right">
-                <div class="active-exclusive-product-slider">
-                    <!-- single exclusive carousel -->
-                    {% for product in exclusive.product %}
-                    <div class="single-exclusive-slider">
-                        <img class="img-fluid" src="{% static product.image_link %}" alt="">
-                        <div class="product-details">
-                            <div class="price">
-                                <h6>{{product.discount_price}}</h6>
-                                <h6 class="l-through">{{product.price}}</h6>
-                            </div>
-                            <h4>{{product.name}}</h4>
-                            <div class="add-bag d-flex align-items-center justify-content-center">
-                                <a class="add-btn" href="{% url 'basket' %}"><span class="ti-bag"></span></a>
-                                <span class="add-text text-uppercase">Додати до кошика</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
+          </div>
         </div>
+        <a
+          href="{% url 'category' %}"
+          class="primary-btn"
+          >Весь товар</a
+        >
+      </div>
+      <div class="col-lg-6 no-padding exclusive-right">
+        <div class="active-exclusive-product-slider">
+          <!-- single exclusive carousel -->
+          {% for product in exclusive.product %}
+          <div class="single-exclusive-slider">
+            <img
+              class="img-fluid"
+              src="{% static product.image_link %}"
+              alt=""
+            />
+            <div class="product-details">
+              <div class="price">
+                <h6>{{product.discount_price}}</h6>
+                <h6 class="l-through">{{product.price}}</h6>
+              </div>
+              <h4>{{product.name}}</h4>
+              <div
+                class="add-bag d-flex align-items-center justify-content-center"
+              >
+                <a
+                  class="add-btn"
+                  href="{% url 'basket' %}"
+                  ><span class="ti-bag"></span
+                ></a>
+                <span class="add-text text-uppercase">Додати до кошика</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- End exclusive deal Area -->
 
 <!-- Start brand Area -->
 <section class="brand-area section_gap">
-    <div class="container">
-        <div class="row">
-            {% for brand in brands %}
-            <a class="col single-img" href="">
-                <img class="img-fluid d-block mx-auto" src="{% static brand.link %}" alt="">
-            </a>
-            {% endfor %}
-        </div>
+  <div class="container">
+    <div class="row">
+      {% for brand in brands %}
+      <a
+        class="col single-img"
+        href=""
+      >
+        <img
+          class="img-fluid d-block mx-auto"
+          src="{% static brand.link %}"
+          alt=""
+        />
+      </a>
+      {% endfor %}
     </div>
+  </div>
 </section>
 <!-- End brand Area -->
 {% endblock %}

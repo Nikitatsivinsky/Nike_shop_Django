@@ -234,19 +234,25 @@
 
 .single-product {
 	margin-bottom: 50px;
+	position: relative;
 
 	img {
+		position: absolute;
+		top: 0;
+		left: 0;
 		margin-bottom: 20px;
 		width        : 100%;
 	}
 
 	.product-details {
+		display: none;
 		h6 {
 			font-size     : 16px;
 			text-transform: uppercase;
 		}
 
 		.price {
+			
 			h6 {
 				font-size    : 14px;
 				display      : inline-block;
