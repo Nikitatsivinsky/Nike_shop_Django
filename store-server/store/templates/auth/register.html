@@ -11,11 +11,12 @@
       href="{% static 'css/main.min.css'%}"
     />
 
-    {% comment %} <link
+    {% comment %}
+    <link
       rel="stylesheet"
       href="{% static 'css/register.css' %}"
-    /> {% endcomment %}
-    {% comment %}
+    />
+    {% endcomment %} {% comment %}
     <style>
       body {
         background: #c7b39b url({%static"img/banner/banner-bg.jpg"%});
@@ -43,7 +44,9 @@
             <div class="nav">
               <ul class="links">
                 <li class="signin-active"><a class="btn">Увійти</a></li>
-                <li class="signup-inactive"><a class="btn">Зареєструватися</a></li>
+                <li class="signup-inactive">
+                  <a class="btn">Зареєструватися</a>
+                </li>
               </ul>
             </div>
             <div
@@ -84,7 +87,15 @@
                 <div class="signin-socials">Увійти, як користувач:</div>
 
                 <div class="btn-gmail">
-                  <a><img src="{% static 'img/icons/gmail.svg'%}" alt="icon gmail" /></a>
+                  <a
+                    ><span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span
+                    ><img
+                      src="{% static 'img/icons/gmail-icon.svg'%}"
+                      alt="icon gmail"
+                  /></a>
                 </div>
               </form>
 
