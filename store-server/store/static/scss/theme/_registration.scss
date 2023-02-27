@@ -1,37 +1,16 @@
 .registration {
-  height              : 100vh;
-  display             : flex;
-  justify-content     : center;
-  align-items         : center;
-  background          : url(../img/banner/banner-bg.jpg) center / cover fixed;
-  // body {
-  //   background:
-  //     -webkit-linear-gradient(rgba(246, 247, 249, 0.8),
-  //       rgba(246, 247, 249, 0.8)),
-  //     url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/sky-clouds-cloudy-mountain.jpg) no-repeat center center fixed;
-  //   background :
-  //     linear-gradient(rgba(246, 247, 249, 0.8),
-  //       rgba(246, 247, 249, 0.8)),
-  //     url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/sky-clouds-cloudy-mountain.jpg) no-repeat center center fixed;
-  //   background-size: cover;
-  // }
-
-  // background-image     : url(../img/banner/banner-bg.jpg);
-  // background-size      : cover;
-  // background-position  : center center;
-  // background-attachment: fixed;
+  height         : 100vh;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  background     : url(../img/banner/banner-bg.jpg) center / cover fixed;
 
   .frame {
-    height        : 575px;
-    max-width     : 430px;
-    // background:
-    //   -webkit-linear-gradient(rgba(35, 43, 85, 0.75),
-    //     rgba(35, 43, 85, 0.95)),
-    //   url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/clouds-cloudy-forest-mountain.jpg) no-repeat center center;
-    background    :
+    height   : 575px;
+    max-width: 430px;
+    background:
       linear-gradient(rgb(255, 191, 0),
         rgb(255, 183, 0));
-    // url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/clouds-cloudy-forest-mountain.jpg) no-repeat center center;
     background-size   : cover;
     margin-left       : auto;
     margin-right      : auto;
@@ -79,7 +58,7 @@
     color         : rgb(0, 0, 0);
   }
 
-  .signin-active>.btn.active {
+  .signin-active a {
     padding-bottom    : 10px;
     color             : rgb(0, 0, 0);
     text-decoration   : none;
@@ -89,15 +68,15 @@
     cursor            : pointer;
   }
 
-  .signin-inactive>.btn {
+  .signin-inactive a {
     padding-bottom : 0;
-    color          : rgba(0,0,0,0.5);
+    color          : rgba(0, 0, 0, 0.57);
     text-decoration: none;
     border-bottom  : none;
     cursor         : pointer;
   }
 
-  .signup-inactive>.btn.active {
+  .signup-active a {
     cursor         : pointer;
     color          : rgba(0, 0, 0, 1);
     text-decoration: none;
@@ -105,12 +84,16 @@
     padding-bottom : 10px;
   }
 
-  .signup-inactive>.btn {
+  .signup-inactive a {
     cursor            : pointer;
-    color             : rgba(0, 0, 0, 0.5);
+    color             : rgba(0, 0, 0, 0.57);
     text-decoration   : none;
     -webkit-transition: all .25s ease;
     transition        : all .25s ease;
+  }
+
+  .signup-inactive.signup-active>.btn.active {
+    color: rgba(0, 0, 0, 1);
   }
 
   .form-signin {
@@ -368,24 +351,98 @@
   }
 
   .btn-gmail {
-    width        : 40px;
-    height       : 40px;
-    margin       : 0px auto 0px;
-    border-radius: 50%;
-    transition   : background .3s ease-in-out;
-    cursor       : pointer;
+    width           : 120px;
+    height          : 35px;
+    margin          : 0px auto 10px;
 
     a {
-      width : 100%;
-      height: 100%;
+      width        : 100%;
+      height       : 100%;
+      position     : relative;
+      display      : inline-block;
+      color        : #faffa4;
+      font-size    : 20px;
+      border-radius: 10px;
+      overflow     : hidden;
+      transition   : 0.2s;
+      cursor       : pointer;
 
       img {
-        transform: translate(10%, 10%);
+        width    : 30px;
+        height   : 25px;
+        position : absolute;
+        top      : 50%;
+        left     : 50%;
+        transform: translate(-50%, -50%);
+        z-index  : 5;
       }
-    }
 
-    &:hover {
-      background: #ff8000;
+      &:hover {
+        color           : #255784;
+        background      : #faffa4;
+        box-shadow      : 0 0 10px #faffa4, 0 0 40px #faffa4, 0 0 80px #faffa4;
+        transition-delay: 1s;
+      }
+
+      & span {
+        position: absolute;
+        display : block;
+      }
+
+      span:nth-child(1) {
+        top       : 0;
+        left      : -100%;
+        width     : 100%;
+        height    : 2px;
+        background: linear-gradient(90deg, transparent, #faffa4);
+      }
+
+      &:hover span:nth-child(1) {
+        left      : 100%;
+        transition: 1s;
+      }
+
+      span:nth-child(3) {
+        bottom    : 0;
+        right     : -100%;
+        width     : 100%;
+        height    : 2px;
+        background: linear-gradient(270deg, transparent, #faffa4);
+      }
+
+      &:hover span:nth-child(3) {
+        right           : 100%;
+        transition      : 1s;
+        transition-delay: 0.5s;
+      }
+
+      span:nth-child(2) {
+        top       : -100%;
+        right     : 0;
+        width     : 2px;
+        height    : 100%;
+        background: linear-gradient(180deg, transparent, #faffa4);
+      }
+
+      &:hover span:nth-child(2) {
+        top             : 100%;
+        transition      : 1s;
+        transition-delay: 0.25s;
+      }
+
+      span:nth-child(4) {
+        bottom    : -100%;
+        left      : 0;
+        width     : 2px;
+        height    : 100%;
+        background: linear-gradient(360deg, transparent, #faffa4);
+      }
+
+      &:hover span:nth-child(4) {
+        bottom          : 100%;
+        transition      : 1s;
+        transition-delay: 0.75s;
+      }
     }
   }
 
@@ -422,7 +479,8 @@
   a.btn-signup:hover,
   a.btn-signin:hover {
     cursor            : pointer;
-    background-color  : #ff6200;
+    background        : linear-gradient(90deg, rgba(238, 108, 13, 1) 0%, rgba(255, 146, 79, 1) 40%, rgba(255, 166, 0, 1) 100%);
+    box-shadow        : 0 0 10px #faffa4, 0 0 40px #faffa4, 0 0 80px #faffa4;
     -webkit-transition: background-color .5s;
     transition        : background-color .5s;
   }
@@ -480,14 +538,9 @@
     position      : relative;
     left          : 0px;
     top           : -900px;
-    // background:
-    //   -webkit-linear-gradient(rgb(255, 145, 0),
-    //     rgb(255, 128, 0)),
-    //   url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/landscape-nature-man-person.jpeg);
     background    :
       linear-gradient(rgb(255, 145, 0),
         rgb(255, 166, 0));
-    // url(https       ://dl.dropboxusercontent.com/u/22006283/preview/codepen/landscape-nature-man-person.jpeg);
     background-size   : cover;
     opacity           : 0;
     -webkit-transition: all 1.5s ease 0.55s;
@@ -495,7 +548,7 @@
   }
 
   .cover-photo-down {
-    top    : -575px;
+    top    : -610px;
     opacity: 1;
   }
 
@@ -506,7 +559,6 @@
     border-radius      : 70px;
     left               : 155px;
     top                : -1000px;
-    background         : url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/nature-water-rocks-hiking.jpg);
     background-size    : 100% 135%;
     background-position: 100% 100%;
     opacity            : 0;
@@ -516,7 +568,7 @@
   }
 
   .profile-photo-down {
-    top    : -636px;
+    top    : -700px;
     opacity: 1;
   }
 
