@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'apps.orders',
     'apps.shop',
     'apps.other',
+    'django_cleanup',
 
 ]
 
@@ -114,9 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = 'uk'
 
-TIME_ZONE = "UTC"
+LANGUAGES = [
+    ('uk', 'Ukrainian'),
+    ('en', 'English')
+]
+
+
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
