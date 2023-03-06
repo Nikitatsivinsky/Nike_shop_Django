@@ -6,14 +6,14 @@
       <div class="col-lg-12">
         <div class="active-banner-slider owl-carousel">
           <!-- single-slide -->
-          {% for banner_shoes in banner %}
+          {% for shoes in banner %}
           <div class="row single-slide align-items-center d-flex">
             <div class="col-lg-5 col-md-6">
               <div class="banner-content animate__animated animate__fadeInLeft">
                 <h1>
-                  {{ banner_shoes.name_shoes }}<br />{{ banner_shoes.name_model }}
+                  {{ shoes.subject.name }}<br />{{ shoes.subject.model }}
                 </h1>
-                <p>{{ banner_shoes.description }}</p>
+                <p>{{ shoes.subject.description }}</p>
                 <div class="add-bag d-flex align-items-center">
                   <a
                     class="animate__animated animate__fadeInDown animate__infinite"
@@ -41,7 +41,7 @@
               <div class="banner-img">
                 <img
                   class="img-fluid animate__animated animate__fadeInRight"
-                  src="{% static banner_shoes.image_link %}"
+                  src="{{ shoes.subject.image.url }}"
                   alt=""
                 />
               </div>

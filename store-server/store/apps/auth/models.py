@@ -13,7 +13,7 @@ class Profile(models.Model):
     adress = models.CharField(max_length=20, verbose_name='Адреса', null=True, blank=True)
     zip_code = models.CharField(max_length=20, verbose_name='Індекс', null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True, verbose_name='Дата народження')
-    photo = models.ImageField(upload_to='site_images/profile_image', verbose_name='Фото', null=True, blank=True)
+    photo = models.ImageField(upload_to='profile_image/', verbose_name='Фото', null=True, blank=True)
 
     def __str__(self):
         return str(self.user)
