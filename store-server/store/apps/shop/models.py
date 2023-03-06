@@ -2,7 +2,6 @@ from django.db import models
 import uuid
 
 
-
 class Application(models.Model):
     name = models.CharField(max_length=50, verbose_name='Застосування')
 
@@ -124,7 +123,7 @@ class Item(models.Model):
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, verbose_name='Стать')
     materials = models.ManyToManyField('Material', verbose_name='Матеріал')
     types = models.ManyToManyField('Type', verbose_name='Тип')
-    image = models.ImageField(upload_to='site_images/product_image', verbose_name='Фото')
+    image = models.ImageField(upload_to='product_image/', verbose_name='Фото')
     description = models.TextField(verbose_name='Опис')
     famous = models.IntegerField(verbose_name='Популярність')
     in_stock = models.IntegerField(verbose_name='На складі')
@@ -137,20 +136,17 @@ class Item(models.Model):
     def __str__(self):
         return str(f'{self.name} {self.model}')
 
-
-
     class Meta:
         db_table = 'item'
         verbose_name = 'Товар'
         verbose_name_plural = 'Товари'
 
 
-
 class MainBanner(models.Model):
-    name = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.subject)
 
     class Meta:
         verbose_name = 'Головний банер на головній сторінці'
@@ -160,10 +156,10 @@ class MainBanner(models.Model):
 
 
 class NewesBanner(models.Model):
-    name = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.subject)
 
     class Meta:
         verbose_name = 'Банер "Новинки магазину" на головній сторінці'
@@ -173,10 +169,10 @@ class NewesBanner(models.Model):
 
 
 class SaleBanner(models.Model):
-    name = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.subject)
 
     class Meta:
         verbose_name = 'Банер "Розпродаж" на головній сторінці'
@@ -186,10 +182,10 @@ class SaleBanner(models.Model):
 
 
 class ExclusiveBanner(models.Model):
-    name = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.subject)
 
     class Meta:
         verbose_name = 'Банер "Єксклюзивні товари" на головній сторінці'
@@ -199,10 +195,10 @@ class ExclusiveBanner(models.Model):
 
 
 class PopularBanner(models.Model):
-    name = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.subject)
 
     class Meta:
         verbose_name = 'Банер "Популярні товари"'
