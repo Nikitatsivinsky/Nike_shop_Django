@@ -162,14 +162,14 @@
               class="single-product__img"
               ><img
                 class="img-fluid"
-                src="{% static product.link_photo %}"
+                src="{{ product.subject.image.url }}"
                 alt=""
             /></a>
 
             <div class="product-details">
-              <h6><a href="#">{{ product.name }}</a></h6>
+              <h6><a href="#">{{ product.subject.name }} {{ product.subject.model }}</a></h6>
               <div class="price">
-                <h6>{{ product.price }}</h6>
+                <h6>{{ product.subject.price }}</h6>
               </div>
               <div class="prd-bottom">
                 <a
@@ -215,15 +215,15 @@
               class="single-product__img"
               ><img
                 class="img-fluid"
-                src="{% static product.link_photo %}"
+                src="{{ product.subject.image.url }}"
                 alt=""
             /></a>
 
             <div class="product-details">
-              <h6><a href="#">{{ product.name }}</a></h6>
+              <h6><a href="#">{{ product.subject.name }} {{ product.subject.model }}</a></h6>
               <div class="price">
-                <h6>{{ product.discount_price }}</h6>
-                <h6 class="l-through">{{ product.price }}</h6>
+                <h6>{{ product.subject.discount }}</h6>
+                <h6 class="l-through">{{ product.subject.price }}</h6>
               </div>
               <div class="prd-bottom">
                 <a
@@ -298,15 +298,15 @@
           <div class="single-exclusive-slider">
             <img
               class="img-fluid"
-              src="{% static product.image_link %}"
+              src="{{ product.subject.image.url }}"
               alt=""
             />
             <div class="product-details">
               <div class="price">
-                <h6>{{product.discount_price}}</h6>
-                <h6 class="l-through">{{product.price}}</h6>
+                <h6>{{ product.subject.discount }}</h6>
+                <h6 class="l-through">{{ product.subject.price }}</h6>
               </div>
-              <h4>{{product.name}}</h4>
+              <h4>{{ product.subject.name }} {{ product.subject.model }}</h4>
               <div
                 class="add-bag d-flex align-items-center justify-content-center"
               >

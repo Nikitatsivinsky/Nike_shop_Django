@@ -143,3 +143,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_ROOT = BASE_DIR / 'site_images/'
 MEDIA_URL = '/site_images/'
+
+MAX_BANNER_COUNT = 8
+MAX_POPULAR_BANNER_COUNT = 9
