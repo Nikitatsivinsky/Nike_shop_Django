@@ -23,7 +23,10 @@
                     {% for shoes in famous.shoes %}
                     <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
                         <div class="single-related-product d-flex">
-                            <a href="{% url 'single_product' %}"><img src="{{ shoes.subject.image.url }}" alt=""></a>
+                            <a href="{% url 'single_product' %}">
+                                <img src="{{ shoes.subject.image.url }}" alt=""
+                                width="70" height="70">
+                            </a>
                             <div class="desc">
                                 <a href="{% url 'single_product' %}" class="title">{{ shoes.subject.name }} {{ shoes.subject.model }}</a>
                                 <div class="price">

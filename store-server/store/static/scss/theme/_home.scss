@@ -596,6 +596,7 @@
 .single-related-product {
 	margin-bottom: 30px;
 	@include transition();
+	align-items: center;
 
 	.desc {
 		margin: 10px 0px 10px 15px;
