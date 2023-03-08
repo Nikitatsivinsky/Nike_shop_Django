@@ -476,6 +476,11 @@
 .s_product_inner{
 	
 }
+
+.product-details a:hover{
+	color: $primary-color2;
+}
+
 .s_Product_carousel{
 	.owl-dots{
 		position: absolute;

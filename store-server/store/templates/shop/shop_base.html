@@ -21,7 +21,7 @@
             <div class="col-lg-9">
                 <div class="row">
                     {% for shoes in famous.shoes %}
-                    <div class={{ shoes.class }}>
+                    <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
                         <div class="single-related-product d-flex">
                             <a href="{% url 'single_product' %}"><img src="{{ shoes.subject.image.url }}" alt=""></a>
                             <div class="desc">
