@@ -1,21 +1,26 @@
 /* banner area css
 ============================================================================================ */
 .banner-area {
+	height: 100vh;
 	background: url(../img/banner/banner-bg.jpg) center no-repeat;
 	background-size: cover;
 	position: relative;
 	.fullscreen {
-		height: 1150px !important;
+		height: 100vh!important;
 
-		@media (max-width: 768px) {
-			height: 650px !important;
-		}
+		// @media (max-width: 1600px) {
+		// 	height: 820px !important;
+		// }
+
+		// @media (max-width: 768px) {
+		// 	height: 650px !important;
+		// }
 	}
 	.active-banner-slider {
 		.owl-nav {
 			position: absolute;
 			right: 0;
-			bottom: -200px;
+			bottom: -120px;
 			@media (max-width: 1920px) {
 				right: -115px;
 			}

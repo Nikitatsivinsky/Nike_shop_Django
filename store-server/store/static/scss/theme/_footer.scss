@@ -1,13 +1,15 @@
 //--------- start footer Area -------------//
 
 .footer-area {
-	padding-top: 100px;
+	padding-top     : 100px;
 	background-color: #222222;
+
 	h6 {
-		color: #fff;
+		color        : #fff;
 		margin-bottom: 25px;
-		font-size: 18px;
-		font-weight: 600;
+		font-size    : 18px;
+		font-weight  : 600;
+
 		@media (max-width: 767px) {
 			margin-bottom: 15px;
 		}
@@ -15,6 +17,7 @@
 }
 
 .copy-right-text {
+
 	i,
 	a {
 		color: $primary-color;
@@ -23,9 +26,11 @@
 
 .instafeed {
 	margin: -5px;
+
 	li {
 		overflow: hidden;
-		width: 25%;
+		width   : 25%;
+
 		img {
 			margin: 5px;
 		}
@@ -36,6 +41,7 @@
 	a {
 		padding-right: 25px;
 		@include transition();
+
 		&:hover {
 			i {
 				color: $primary-color;
@@ -49,49 +55,63 @@
 	}
 }
 
+.footer__form {
+	margin-top: 15px;
+}
+
 .single-footer-widget {
 	@media (max-width: 991px) {
 		margin-bottom: 40px;
 	}
+
+	&__text {
+		margin-bottom: 15px;
+	}
+
 	.form-inline {
 		display: inline-block;
-		width: 100%;
+		width  : 100%;
 	}
+
 	input {
-		border: none;
-		width: 80% !important;
-		font-weight: 300;
-		background: #fff;
-		color: #777;
-		padding-left: 20px;
+		border       : none;
+		width        : 80% !important;
+		font-weight  : 300;
+		background   : #fff;
+		color        : #777;
+		padding-left : 20px;
 		border-radius: 0;
-		font-size: 14px;
+		font-size    : 14px;
+
 		&:focus {
-			outline: none;
+			outline   : none;
 			box-shadow: none;
 		}
-		@include placeholder{
+
+		@include placeholder {
 			color: #ccc;
 		}
 	}
 
 	.bb-btn {
 		@extend .gradient-color;
-		color: #fff;
-		font-weight: 300;
+		color        : #fff;
+		font-weight  : 300;
 		border-radius: 0;
-		z-index: 9999;
-		cursor: pointer;
+		z-index      : 9999;
+		cursor       : pointer;
 	}
 
 	.info {
-		position: absolute;
+		position  : absolute;
 		margin-top: 5%;
-		color: #fff;
-		font-size: 12px;
+		color     : #fff;
+		font-size : 12px;
+
 		&.valid {
 			color: green;
 		}
+
 		&.error {
 			color: red;
 		}
@@ -99,14 +119,15 @@
 
 	.click-btn {
 		@extend .gradient-bg;
-		color: #fff;
-		border-radius: 0;
-		border-top-left-radius: 0px;
+		color                    : #fff;
+		border-radius            : 0;
+		border-top-left-radius   : 0px;
 		border-bottom-left-radius: 0px;
-		padding: 6px 12px;
-		border: 0;
+		padding                  : 6px 12px;
+		border                   : 0;
+
 		&:focus {
-			outline: none;
+			outline   : none;
 			box-shadow: none;
 		}
 	}
@@ -114,53 +135,73 @@
 	::-moz-selection {
 		/* Code for Firefox */
 		background-color: #191919 !important;
-		color: $text-color;
+		color           : $text-color;
 	}
+
 	::selection {
 		background-color: #191919 !important;
-		color: $text-color;
+		color           : $text-color;
 	}
+
 	::-webkit-input-placeholder {
 		/* WebKit, Blink, Edge */
-		color: $text-color;
+		color      : $text-color;
 		font-weight: 300;
 	}
+
 	:-moz-placeholder {
 		/* Mozilla Firefox 4 to 18 */
-		color: $text-color;
-		opacity: 1;
+		color      : $text-color;
+		opacity    : 1;
 		font-weight: 300;
 	}
+
 	::-moz-placeholder {
 		/* Mozilla Firefox 19+ */
-		color: $text-color;
-		opacity: 1;
+		color      : $text-color;
+		opacity    : 1;
 		font-weight: 300;
 	}
+
 	:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		color: $text-color;
+		color      : $text-color;
 		font-weight: 300;
 	}
+
 	::-ms-input-placeholder {
 		/* Microsoft Edge */
-		color: $text-color;
+		color      : $text-color;
 		font-weight: 300;
 	}
 }
 
 .footer-text {
 	padding-top: 80px;
+
 	@media (max-width: 991px) {
 		padding-top: 40px;
 	}
+
 	a,
 	i {
-		color: $primary-color;
+		margin-left: 7px;
+		color      : $primary-color;
 	}
 
 	a:hover {
 		color: #ff8000;
+	}
+}
+
+.footer__developer {
+	display        : flex;
+	justify-content: center;
+	margin         : 10px auto 0;
+	font-weight    : bold;
+
+	a {
+		margin-left: 7px;
 	}
 }
 

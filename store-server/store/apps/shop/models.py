@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+from django.conf import settings
+from django.core.exceptions import ValidationError
 
 
 class Application(models.Model):
@@ -123,12 +125,14 @@ class Item(models.Model):
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, verbose_name='Стать')
     materials = models.ManyToManyField('Material', verbose_name='Матеріал')
     types = models.ManyToManyField('Type', verbose_name='Тип')
-    image = models.ImageField(upload_to='product_image/', verbose_name='Фото')
+    image = models.ImageField(upload_to='product_image/', verbose_name='Фото',
+                              help_text="Рекомендований розмір зображення 655x395")
     description = models.TextField(verbose_name='Опис')
     famous = models.IntegerField(verbose_name='Популярність')
     in_stock = models.IntegerField(verbose_name='На складі')
     length_cm = models.IntegerField(null=True, blank=True, verbose_name='Довжина')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Ціна')
+    discount = models.DecimalField(max_digits=8, decimal_places=2, null=True, verbose_name='Знижка')
     size = models.ManyToManyField('Size', verbose_name='Розміри')
     weight = models.IntegerField(verbose_name='Вага')
     year = models.IntegerField(null=True, blank=True, verbose_name='Рік')
@@ -161,6 +165,11 @@ class NewesBanner(models.Model):
     def __str__(self):
         return str(self.subject)
 
+    def save(self, *args, **kwargs):
+        if NewesBanner.objects.count() >= settings.MAX_BANNER_COUNT:
+            raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Новинки магазину'")
+        super(NewesBanner, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = 'Банер "Новинки магазину" на головній сторінці'
         verbose_name_plural = 'Банер "Новинки магазину" на головній сторінці'
@@ -173,6 +182,11 @@ class SaleBanner(models.Model):
 
     def __str__(self):
         return str(self.subject)
+
+    def save(self, *args, **kwargs):
+        if SaleBanner.objects.count() >= settings.MAX_BANNER_COUNT:
+            raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Розпродаж'")
+        super(SaleBanner, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Банер "Розпродаж" на головній сторінці'
@@ -199,6 +213,11 @@ class PopularBanner(models.Model):
 
     def __str__(self):
         return str(self.subject)
+
+    def save(self, *args, **kwargs):
+        if PopularBanner.objects.count() >= settings.MAX_POPULAR_BANNER_COUNT:
+            raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Популярні товари'")
+        super(PopularBanner, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Банер "Популярні товари"'

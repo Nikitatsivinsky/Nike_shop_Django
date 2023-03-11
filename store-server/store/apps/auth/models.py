@@ -34,3 +34,15 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class MailDistribution(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Пошта')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'maildistribution'
+        app_label = 'other'
+        verbose_name = 'Пошта розсилання'
+        verbose_name_plural = 'Пошта розсилання'

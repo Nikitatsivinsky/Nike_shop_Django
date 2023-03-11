@@ -476,6 +476,13 @@
 .s_product_inner{
 	
 }
+
+.product-details a:hover{
+	font-family: "Roboto";
+	color: $primary-color2;
+	font-weight: 500;
+}
+
 .s_Product_carousel{
 	.owl-dots{
 		position: absolute;
