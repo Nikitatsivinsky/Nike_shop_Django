@@ -1,0 +1,225 @@
+.user-profile {
+  width          : 100vw;
+  height         : 100vh;
+  background     : url(../img/banner/banner-bg.jpg) center / cover fixed;
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  justify-content: center;
+
+  &__form {
+    max-width : 800px;
+    margin    : 0px auto;
+    padding   : 0 20px;
+    text-align: left;
+
+    input,
+    select {
+      width        : 100%;
+      border       : none;
+      outline      : none;
+      margin-top   : 7px;
+      padding      : 16px 20px;
+      font-size    : 16px;
+      line-height  : 1.4;
+      border-radius: 8px;
+      border       : 1px solid $border-profile;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    label {
+      position     : relative;
+      display      : block;
+      font-size    : 18px;
+      line-height  : 1.5;
+      font-weight  : 500;
+      color        : $title-color;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__head {
+    display        : flex;
+    align-items    : center;
+    justify-content: start;
+    margin-bottom  : 50px;
+  }
+
+  &__img {
+    flex-basis     : 200px;
+    width          : 150px;
+    height         : 150px;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    position       : relative;
+    margin-right   : 50px;
+    border-radius  : 100%;
+    border         : 2px solid $border-profile;
+
+    label.user-profile__img-label {
+      width           : 42px;
+      height          : 42px;
+      position        : absolute;
+      bottom          : -25px;
+      right           : 0;
+      border-radius   : 100%;
+      background-color: $primary-color;
+      cursor          : pointer;
+
+      input[type=file] {
+        display: none;
+      }
+
+      &::after {
+        content   : '';
+        width     : 25px;
+        height    : 25px;
+        position  : absolute;
+        top       : calc(50% - 12.5px);
+        left      : calc(50% - 12.5px);
+        background: url(../img/profile/add.svg) 50% 50% / cover no-repeat;
+      }
+    }
+  }
+
+  &__name {
+    width: 100%;
+  }
+
+  &__center {
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    gap            : 50px;
+    margin-bottom  : 15px;
+  }
+
+  &__buttons {
+    margin-top     : 50px;
+    display        : flex;
+    justify-content: end;
+
+    button {
+      font-size     : 16px;
+      padding       : 12px 30px;
+      outline       : none;
+      margin-left   : 60px;
+      border        : 2px solid transparent;
+      font-weight   : 500;
+      text-transform: uppercase;
+    }
+  }
+
+  &__reset {
+    background-color: transparent;
+    position        : relative;
+    overflow        : hidden;
+    border-radius   : 5px;
+
+    &:hover {
+      color           : $white;
+      background      : $primary-color;
+      box-shadow      : 0 0 10px $primary-color2, 0 0 40px $primary-color2, 0 0 80px $primary-color2;
+      transition-delay: 1s;
+      border          : 2px solid none;
+    }
+
+    & span {
+      position: absolute;
+      display : block;
+    }
+
+    span:nth-child(1) {
+      top       : 0;
+      left      : -100%;
+      width     : 100%;
+      height    : 2px;
+      background: linear-gradient(90deg, transparent, #faffa4);
+    }
+
+    &:hover span:nth-child(1) {
+      left      : 100%;
+      transition: 1s;
+    }
+
+    span:nth-child(3) {
+      bottom    : 0;
+      right     : -100%;
+      width     : 100%;
+      height    : 2px;
+      background: linear-gradient(270deg, transparent, #faffa4);
+    }
+
+    &:hover span:nth-child(3) {
+      right           : 100%;
+      transition      : 1s;
+      transition-delay: 0.5s;
+    }
+
+    span:nth-child(2) {
+      top       : -100%;
+      right     : 0;
+      width     : 2px;
+      height    : 100%;
+      background: linear-gradient(180deg, transparent, #faffa4);
+    }
+
+    &:hover span:nth-child(2) {
+      top             : 100%;
+      transition      : 1s;
+      transition-delay: 0.25s;
+    }
+
+    span:nth-child(4) {
+      bottom    : -100%;
+      left      : 0;
+      width     : 2px;
+      height    : 100%;
+      background: linear-gradient(360deg, transparent, #faffa4);
+    }
+
+    &:hover span:nth-child(4) {
+      bottom          : 100%;
+      transition      : 1s;
+      transition-delay: 0.75s;
+    }
+  }
+
+  &__save {
+    background-color: $primary-color;
+    border-radius   : 5px;
+
+    &:hover {
+      color           : #faffa4;
+      background      : $primary-color2;
+      box-shadow      : 0 0 10px $primary-color, 0 0 40px $primary-color, 0 0 80px $primary-color2;
+      transition-delay: .3s;
+      border          : 2px solid $primary-color;
+      border-radius   : 20px;
+    }
+  }
+}
+
+.select-dropdown {
+  appearance: none;
+  font-size : 14px;
+  width     : 100%;
+}
+
+.select-dropdown__icon {
+  position      : absolute;
+  right         : 26px;
+  top           : 60px;
+  pointer-events: none;
+  transition    : transform .3s;
+}
+
+.select-dropdown:active {
+  .select-dropdown__icon {
+    transform: rotate(180deg);
+  }
+}
