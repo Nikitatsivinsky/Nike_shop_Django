@@ -24,7 +24,7 @@ import apps.orders.views as orders
 import apps.other.views as other
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls, name='admin'),
     path('', shop.index, name='index'),
     path('cart/', orders.cart, name='basket'),
     path('category/', shop.category, name='category'),

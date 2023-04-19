@@ -2,6 +2,11 @@ from django.shortcuts import render
 from django.apps import apps
 from django.core.mail import send_mail
 
+from apps.auth.models import MailDistribution
+from .forms import SubscribeForm
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+
 
 
 def get_model(name:str, app = 'shop'):
@@ -140,10 +145,31 @@ def index(request):
         'famous': {}
     }
     context.update(get_famous_dict())
-    return render(request, 'shop/index.html', context)
+
+    if request.method == 'POST':
+        print(request)
+        form = SubscribeForm(data=request.POST)
+        if form.is_valid():
+            email = request.POST['email']
+            try:
+                mail_dis = MailDistribution()
+                mail_dis.email = email
+                mail_dis.save()
+                messages.add_message(request, messages.INFO, 'Ви успішно підписались!')
+                return render(request, 'shop/index.html', context)
+            except Exception:
+                messages.add_message(request, messages.INFO, 'Ви вже є в базі!')
+                return render(request, 'shop/index.html', context)
+
+    else:
+        context.update({'subscribe_form': SubscribeForm()})
+        return render(request, 'shop/index.html', context)
 
 def category(request):
-    return render(request, 'shop/category.html', get_famous_dict())  # need to give context, not just famous_dict
+    context = {}
+    context.update(get_famous_dict())
+    context.update({'subscribe_form': SubscribeForm()})
+    return render(request, 'shop/category.html', context)  # need to give context, not just famous_dict
 
 
 def single_product(request):
