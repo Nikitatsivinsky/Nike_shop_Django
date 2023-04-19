@@ -216,15 +216,25 @@
                 <li class="nav-item">
                   <a
                     class="nav-link"
-                    href="/contact"
+                    href="{% url 'contact' %}"
                     >Контакти</a
                   >
                 </li>
+                  {% if user.is_superuser or user.is_staff %}
+                  <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="{% url 'admin:index' %}"
+                    >Адмін</a
+                  >
+                </li>
+                  {% endif %}
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
+
                   <a
-                    href="{% url 'registration' %}"
+                    href=" {% if user.is_authenticated %} {% url 'basket' %} {% else %} {% url 'registration' %} {% endif %}"
                     class="cart"
                     ><span class="ti-user"></span
                   ></a>
@@ -302,24 +312,32 @@
             <div class="single-footer-widget">
               <h6>Підписка</h6>
               <p>Ми залюбки будимо інформувати Вас лише о знижках.</p>
+
+            {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" style="font-size: 14px; font-weight: bold;"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+            {% endif %}
+            {% if subscribe_form.non_field_errors %}
+                    <ul class="messages">
+                        <li class="info" style="font-size: 14px; font-weight: bold;">{{ subscribe_form.non_field_errors }}</li>
+                    </ul>
+            {% endif %}
               <div
                 class="footer__form"
                 id="mc_embed_signup"
               >
                 <form
-                  action="#"
+                  action="/"
                   method="post"
                   class="form-inline"
                 >
+                {% if not messages and not subscribe_form.non_field_errors %}
                   <div class="d-flex flex-row">
-                    <input
-                      class="form-control"
-                      name="email"
-                      placeholder="Ваша Пошта"
-                      required
-                      type="email"
-                    />
-
+                      {% csrf_token %}
+                     {{ subscribe_form.email }}
                     <button
                       class="click-btn btn btn-default"
                       type="submit"
@@ -329,79 +347,67 @@
                         aria-hidden="true"
                       ></i>
                     </button>
-                    <div style="position: absolute; left: -5000px">
-                      <input
-                        name="b_36c4fd991d266f23781ded980_aefe40901a"
-                        tabindex="-1"
-                        value=""
-                        type="text"
-                      />
-                    </div>
-
-                    <!-- <div class="col-lg-4 col-md-4">
-												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-											</div>  -->
                   </div>
-                  <div class="info"></div>
+                {% endif %}
                 </form>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="single-footer-widget mail-chimp">
-              <h6 class="mb-20">Instragram фото</h6>
-              <ul class="instafeed d-flex flex-wrap">
-                <li>
-                  <img
-                    src="{% static 'img/i1.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i2.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i3.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i4.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i5.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i6.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i7.jpg' %}"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    src="{% static 'img/i8.jpg' %}"
-                    alt=""
-                  />
-                </li>
-              </ul>
-            </div>
-          </div>
+{#          <div class="col-lg-3 col-md-6 col-sm-6">#}
+{#            <div class="single-footer-widget mail-chimp">#}
+{#              <h6 class="mb-20">Instragram фото</h6>#}
+{#              <ul class="instafeed d-flex flex-wrap">#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i1.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i2.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i3.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i4.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i5.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i6.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i7.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#                <li>#}
+{#                  <img#}
+{#                    src="{% static 'img/i8.jpg' %}"#}
+{#                    alt=""#}
+{#                  />#}
+{#                </li>#}
+{#              </ul>#}
+{#            </div>#}
+{#          </div>#}
           <div class="col-lg-2 col-md-6 col-sm-6">
             <div class="single-footer-widget">
               <h6>Слідкуй за нами</h6>
@@ -467,7 +473,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+{#    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>  Этот скрипт делает переадресацию форм, которые я подключаю! Поэтому он вырезан#}
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
     <script src="{% static 'js/nouislider.min.js' %}"></script>
