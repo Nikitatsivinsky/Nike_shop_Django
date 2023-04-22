@@ -1,67 +1,65 @@
-{%  extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block page_content %}
 
-{% block page_content %}
+<!-- CONTAINER -->
+<main
+  id="user-profile"
+  class="user-profile"
+>
+  <h1 class="user-profile__title">Особистий кабінет</h1>
 
-    <!-- CONTAINER -->
-    <main
-      id="user-profile"
-      class="user-profile"
+  <!-- BODY CONTENT -->
+  <div class="user-profile__frame">
+    <form
+      name="user-profile-form"
+      class="user-profile__form"
+      id="user-profile-form"
+      method="post"
+      action="#"
     >
-      <h1 class="user-profile__title">Особистий кабінет</h1>
-
-      <!-- BODY CONTENT -->
-      <form
-        name="user-profile-form"
-        class="user-profile__form"
-        id="user-profile-form"
-        method="post"
-        action="#"
-      >
-        <div class="user-profile__head">
-          <div class="user-profile__img">
-            <img src="../../static/img/profile/user.svg" />
-            <label class="user-profile__img-label"><input type="file" /></label>
-          </div>
-
-          <div class="user-profile__name">
-            <label for="user-profile__name">
-              ПІБ*
-              <input
-                name="name"
-                id="user-profile__name"
-                type="text"
-                placeholder="Ваше прізвище ім’я по-батькові"
-                required
-              />
-            </label>
-          </div>
+      <div class="user-profile__head">
+        <div class="user-profile__img">
+          <img src="../../static/img/profile/user.svg" width="100" height="100" />
+          <label class="user-profile__img-label"><input type="file" /></label>
         </div>
 
-        <div class="user-profile__center">
-          <div class="user-profile__left">
-            <label for="user-profile__birth">
-              Дата народження*
-              <input
-                name="name"
-                id="user-profile__birth"
-                type="text"
-                placeholder="01.01.1980"
-                required
-              />
-            </label>
-            <label for="user-profile__email">
-              Електронна пошта*
-              <input
-                name="email"
-                id="user-profile__email"
-                type="email"
-                placeholder="mail@blabla.ua"
-                required
-              />
-            </label>
-            <label class="user-profile__dropdown">
-              Місто
+        <div class="user-profile__name">
+          <label for="user-profile__name">
+            ПІБ*
+            <input
+              name="name"
+              id="user-profile__name"
+              type="text"
+              placeholder="Ваше прізвище ім’я по-батькові"
+              required
+            />
+          </label>
+        </div>
+      </div>
+
+      <div class="user-profile__center">
+        <div class="user-profile__left">
+          <label for="user-profile__birth">
+            Дата народження*
+            <input
+              name="name"
+              id="user-profile__birth"
+              type="text"
+              placeholder="01.01.1980"
+              required
+            />
+          </label>
+          <label for="user-profile__email">
+            Електронна пошта*
+            <input
+              name="email"
+              id="user-profile__email"
+              type="email"
+              placeholder="mail@blabla.ua"
+              required
+            />
+          </label>
+          <label class="user-profile__city user-profile__dropdown">
+            Місто
               <select class="user-profile__dropdown-select select-dropdown">
                 <option value="ky">Київ</option>
                 <option value="ar">Вінниця</option>
@@ -97,34 +95,35 @@
                   Харків
                 </option>
               </select>
-              <svg
-                width="16"
-                height="6"
-                class="select-dropdown__icon"
-                viewBox="0 0 16 6"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.291 0L7.64549 6L-2.95639e-05 5.96724e-06L15.291 0Z"
-                />
-              </svg>
-            </label>
-          </div>
-
-          <div class="user-profile__right">
-            <label for="user-profile__phone">
-              Контактний номер*
-              <input
-                name="phone"
-                id="user-profile__phone"
-                type="tel"
-                placeholder="+38 (011) 222 33 44"
-                required
+            <svg
+              width="16"
+              height="6"
+              class="select-dropdown__icon"
+              viewBox="0 0 16 6"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.291 0L7.64549 6L-2.95639e-05 5.96724e-06L15.291 0Z"
               />
-            </label>
-            <label for="user-profile__country user-profile__dropdown">
-              Країна
+            </svg>
+          </label>
+        </div>
+
+        <div class="user-profile__right">
+          <label for="user-profile__phone">
+            Контактний номер*
+            <input
+              name="phone"
+              id="user-profile__phone"
+              type="tel"
+              placeholder="+38 (011) 222 33 44"
+              required
+            />
+          </label>
+          <label for="user-profile__country user-profile__dropdown">
+            Країна
+            <!-- <div class="dropdown"> -->
               <select class="user-profile__dropdown-select select-dropdown">
                 <option value="ky">Польша</option>
                 <option value="ar">Німечинна</option>
@@ -160,44 +159,56 @@
                   Україна
                 </option>
               </select>
-              <svg
-                width="16"
-                height="6"
-                class="select-dropdown__icon"
-                viewBox="0 0 16 6"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.291 0L7.64549 6L-2.95639e-05 5.96724e-06L15.291 0Z"
-                />
-              </svg>
-            </label>
-            <label for="user-profile__zip-code">
-              Поштовий індекс
-              <input
-                name="zip-code"
-                id="user-profile__zip-code"
-                type="number"
-                placeholder="12345"
+            <!-- </div> -->
+            <svg
+              width="16"
+              height="6"
+              class="select-dropdown__icon"
+              viewBox="0 0 16 6"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.291 0L7.64549 6L-2.95639e-05 5.96724e-06L15.291 0Z"
               />
-            </label>
-          </div>
-        </div>
-
-        <div class="user-profile__addres">
-          <label for="user-profile__address">
-            Адреса
+            </svg>
+          </label>
+          <label for="user-profile__zip-code">
+            Поштовий індекс
             <input
-              type="text"
-              name="address"
-              id="user-profile__address"
-              placeholder="Ваша адреса"
+              name="zip-code"
+              id="user-profile__zip-code"
+              type="number"
+              placeholder="12345"
             />
           </label>
         </div>
+      </div>
 
-        <div class="user-profile__buttons">
+      <div class="user-profile__addres">
+        <label for="user-profile__address">
+          Адреса
+          <input
+            type="text"
+            name="address"
+            id="user-profile__address"
+            placeholder="Ваша адреса"
+          />
+        </label>
+      </div>
+
+      <div class="user-profile__buttons">
+        <a
+          class="user-profile__order"
+          href=""
+          ><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Мої замовлення
+        </a>
+
+        <div class="user-profile__buttons-right">
           <button
             class="user-profile__save"
             type="submit"
@@ -217,7 +228,9 @@
             Очистити
           </button>
         </div>
-      </form>
-      <!-- END BODY CONTENT -->
-    </main>
+      </div>
+    </form>
+  </div>
+  <!-- END BODY CONTENT -->
+</main>
 {% endblock %}
