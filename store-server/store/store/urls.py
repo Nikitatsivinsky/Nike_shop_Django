@@ -36,6 +36,7 @@ urlpatterns = [
     path('single-product/', shop.single_product, name='single_product'),
     path('tracking/', orders.tracking, name='tracking'),
     path('registration/', auth.registration, name='registration'),
+    path('profile/', auth.profile, name='profile'),
 ]
 
 # add url for site_images folder

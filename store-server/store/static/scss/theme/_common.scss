@@ -1368,6 +1368,34 @@
 	}
 }
 
+.search_input {
+	position: relative;
+
+	input,
+	button {
+		line-height: 24px;
+		font-size  : 14px;
+		font-family: $primary-font;
+		font-weight: 400;
+		border     : none;
+		outline    : none;
+	}
+
+	button.btn {
+		height      : 100%;
+		position    : absolute;
+		top         : 0;
+		right       : 0;
+		transform: translateX(94%);
+		background-color: $white;
+		border-left: 1px solid $primary-color;
+
+		&:hover {
+			background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+		}
+	}
+}
+
 .main-categories {
 	a {
 		color: $black;
