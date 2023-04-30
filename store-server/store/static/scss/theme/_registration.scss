@@ -124,7 +124,6 @@
     font-weight       : 300;
     padding-left      : 37px;
     padding-right     : 37px;
-    padding-top       : 5px;
     position          : relative;
     top               : -405px;
     left              : 400px;
@@ -351,9 +350,9 @@
   }
 
   .btn-gmail {
-    width           : 120px;
-    height          : 35px;
-    margin          : 0px auto 10px;
+    width : 120px;
+    height: 35px;
+    margin: 0px auto 10px;
 
     a {
       width        : 100%;
@@ -486,6 +485,8 @@
   }
 
   .forgot {
+    display           : flex;
+    justify-content   : space-evenly;
     height            : 100px;
     width             : 80%;
     margin-left       : auto;
@@ -496,6 +497,15 @@
     border-top        : solid 1px rgb(255, 89, 0);
     -webkit-transition: all 0.5s ease;
     transition        : all 0.5s ease;
+
+    span {
+      font-size: 22px;
+      color: $primary-color2;
+    }
+
+    a:hover {
+      text-shadow: 1px 2px #faffa4;
+    }
   }
 
   .forgot-left {
@@ -513,6 +523,20 @@
     font-weight    : 400;
     font-size      : 13px;
     text-decoration: none;
+  }
+
+  .signup-footer {
+    text-align: center;
+    margin-top: 90px;
+
+    a {
+      color    : rgb(0, 0, 0);
+      font-size: 13px;
+
+      &:hover {
+        text-shadow: 1px 2px #faffa4;
+      }
+    }
   }
 
   .welcome {
@@ -534,11 +558,11 @@
   }
 
   .cover-photo {
-    height        : 150px;
-    position      : relative;
-    left          : 0px;
-    top           : -900px;
-    background    :
+    height  : 150px;
+    position: relative;
+    left    : 0px;
+    top     : -900px;
+    background:
       linear-gradient(rgb(255, 145, 0),
         rgb(255, 166, 0));
     background-size   : cover;

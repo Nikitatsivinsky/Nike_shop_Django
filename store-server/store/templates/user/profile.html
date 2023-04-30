@@ -18,7 +18,11 @@
     >
       <div class="user-profile__head">
         <div class="user-profile__img">
-          <img src="../../static/img/profile/user.svg" width="100" height="100" />
+          <img
+            src="../../static/img/profile/user.svg"
+            width="100"
+            height="100"
+          />
           <label class="user-profile__img-label"><input type="file" /></label>
         </div>
 
@@ -58,55 +62,46 @@
               required
             />
           </label>
-          <label class="user-profile__city user-profile__dropdown">
+          <label class="user-profile__city">
             Місто
-              <select class="user-profile__dropdown-select select-dropdown">
-                <option value="ky">Київ</option>
-                <option value="ar">Вінниця</option>
-                <option value="bg">Запоріжжя</option>
-                <option value="bn">Рівне</option>
-                <option value="ca">Тернопіль</option>
-                <option value="cs">Луцьк</option>
-                <option value="da">Львів</option>
-                <option value="de">Дніпро</option>
-                <option value="el">Суми</option>
-                <option value="en">Херсон</option>
-                <option value="es">Одеса</option>
-                <option value="es_419">Кропивницький</option>
-                <option value="et">Кременчук</option>
-                <option value="fa">Чернівці</option>
-                <option value="fi">Чернігів</option>
-                <option value="fil">Житомир</option>
-                <option value="fr">Миколаїв</option>
-                <option value="gu">Полтава</option>
-                <option value="he">Кривий Ріг</option>
-                <option value="hi">Івано-Франківськ</option>
-                <option value="hn">Ужгород</option>
-                <option value="hr">Хмельницький</option>
-                <option value="ht">Біла Церква</option>
-                <option value="hu">Донецьк</option>
-                <option value="id">Маріуполь</option>
-                <option value="it">Бердянськ</option>
-                <option value="ja">Луганськ</option>
-                <option
-                  value="kh"
-                  selected
-                >
-                  Харків
-                </option>
-              </select>
-            <svg
-              width="16"
-              height="6"
-              class="select-dropdown__icon"
-              viewBox="0 0 16 6"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
+            <select
+              class="user-profile__city-select"
+              tabindex="0"
             >
-              <path
-                d="M15.291 0L7.64549 6L-2.95639e-05 5.96724e-06L15.291 0Z"
-              />
-            </svg>
+              <option value="ky">Київ</option>
+              <option value="ar">Вінниця</option>
+              <option value="bg">Запоріжжя</option>
+              <option value="bn">Рівне</option>
+              <option value="ca">Тернопіль</option>
+              <option value="cs">Луцьк</option>
+              <option value="da">Львів</option>
+              <option value="de">Дніпро</option>
+              <option value="el">Суми</option>
+              <option value="en">Херсон</option>
+              <option value="es">Одеса</option>
+              <option value="es_419">Кропивницький</option>
+              <option value="et">Кременчук</option>
+              <option value="fa">Чернівці</option>
+              <option value="fi">Чернігів</option>
+              <option value="fil">Житомир</option>
+              <option value="fr">Миколаїв</option>
+              <option value="gu">Полтава</option>
+              <option value="he">Кривий Ріг</option>
+              <option value="hi">Івано-Франківськ</option>
+              <option value="hn">Ужгород</option>
+              <option value="hr">Хмельницький</option>
+              <option value="ht">Біла Церква</option>
+              <option value="hu">Донецьк</option>
+              <option value="id">Маріуполь</option>
+              <option value="it">Бердянськ</option>
+              <option value="ja">Луганськ</option>
+              <option
+                value="kh"
+                selected
+              >
+                Харків
+              </option>
+            </select>
           </label>
         </div>
 
@@ -121,46 +116,47 @@
               required
             />
           </label>
-          <label for="user-profile__country user-profile__dropdown">
+          <label for="user-profile__country">
             Країна
-            <!-- <div class="dropdown"> -->
-              <select class="user-profile__dropdown-select select-dropdown">
-                <option value="ky">Польша</option>
-                <option value="ar">Німечинна</option>
-                <option value="bg">Чехія</option>
-                <option value="bn">Литва</option>
-                <option value="ca">Франція</option>
-                <option value="cs">Угорщина</option>
-                <option value="da">Румунія</option>
-                <option value="de">Молдова</option>
-                <option value="el">Латвія</option>
-                <option value="en">Сербія</option>
-                <option value="es">Болгарія</option>
-                <option value="es_419">Хорватія</option>
-                <option value="et">Данія</option>
-                <option value="fa">Естонія</option>
-                <option value="fi">Австрія</option>
-                <option value="fil">Албанія</option>
-                <option value="fr">Греція</option>
-                <option value="gu">Швейцарія</option>
-                <option value="he">Італія</option>
-                <option value="hi">Іспанія</option>
-                <option value="hn">Португалія</option>
-                <option value="hr">Туречинна</option>
-                <option value="ht">Норвегія</option>
-                <option value="hu">Ірландія</option>
-                <option value="id">Великобританія</option>
-                <option value="it">Швеція</option>
-                <option value="ja">Фінляндія</option>
-                <option
-                  value="ua"
-                  selected
-                >
-                  Україна
-                </option>
-              </select>
-            <!-- </div> -->
-            <svg
+            <select
+              class="user-profile__country-select"
+              tabindex="1"
+            >
+              <option value="pol" disabled>Польша</option>
+              <option value="ger" disabled>Німечинна</option>
+              <option value="cheh" disabled>Чехія</option>
+              <option value="lit" disabled>Литва</option>
+              <option value="fra" disabled>Франція</option>
+              <option value="ugor" disabled>Угорщина</option>
+              <option value="rum" disabled>Румунія</option>
+              <option value="mol" disabled>Молдова</option>
+              <option value="el" disabled>Латвія</option>
+              <option value="lat" disabled>Сербія</option>
+              <option value="bol" disabled>Болгарія</option>
+              <option value="horv" disabled>Хорватія</option>
+              <option value="dan" disabled>Данія</option>
+              <option value="est">Естонія</option>
+              <option value="avs">Австрія</option>
+              <option value="alb">Албанія</option>
+              <option value="grec">Греція</option>
+              <option value="shveic">Швейцарія</option>
+              <option value="ita">Італія</option>
+              <option value="isp">Іспанія</option>
+              <option value="por">Португалія</option>
+              <option value="tur">Туречинна</option>
+              <option value="norv">Норвегія</option>
+              <option value="irl">Ірландія</option>
+              <option value="uk">Великобританія</option>
+              <option value="shv">Швеція</option>
+              <option value="fin">Фінляндія</option>
+              <option
+                value="ua"
+                selected
+              >
+                Україна
+              </option>
+            </select>
+            <!-- <svg
               width="16"
               height="6"
               class="select-dropdown__icon"
@@ -171,7 +167,7 @@
               <path
                 d="M15.291 0L7.64549 6L-2.95639e-05 5.96724e-06L15.291 0Z"
               />
-            </svg>
+            </svg> -->
           </label>
           <label for="user-profile__zip-code">
             Поштовий індекс
