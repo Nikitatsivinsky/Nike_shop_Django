@@ -1369,6 +1369,7 @@
 }
 
 .search_input {
+	width   : 250px;
 	position: relative;
 
 	input,
@@ -1382,13 +1383,13 @@
 	}
 
 	button.btn {
-		height      : 100%;
-		position    : absolute;
-		top         : 0;
-		right       : 0;
-		transform: translateX(94%);
+		height          : 100%;
+		position        : absolute;
+		top             : 0;
+		right           : 0;
+		// transform       : translateX(94%);
 		background-color: $white;
-		border-left: 1px solid $primary-color;
+		border-left     : 1px solid $primary-color;
 
 		&:hover {
 			background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);

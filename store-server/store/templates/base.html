@@ -230,14 +230,60 @@
                 </li>
                   {% endif %}
               </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
+              <ul class="nav navbar-nav menu-nav navbar-right">
+                <li class="nav-item submenu dropdown">
 
                   <a
-                    href=" {% if user.is_authenticated %} {% url 'basket' %} {% else %} {% url 'registration' %} {% endif %}"
-                    class="cart"
+                    href=""
+                    class="nav-link dropdown-toggle nav-item__user"
+                    data-toggle="dropdown"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                     ><span class="ti-user"></span
                   ></a>
+
+                  <ul class="dropdown-menu dropdown-menu__user">
+                    <li class="nav-item">
+                      <!-- <span class="ti-user"></span> -->
+                      <a
+                        class="nav-link"
+                        href="{% if user.is_authenticated %} {% url 'basket' %} {% else %} {% url 'registration' %} {% endif %}"
+                        >Вхід</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        href="{% url 'admin:index' %}"
+                        >Адмін</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <!-- <span class="ti-user"></span> -->
+                      <a
+                        class="nav-link"
+                        href="{% url 'profile' %}"
+                        >Мій профіль</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <!-- <span class="ti-user"></span> -->
+                      <a
+                        class="nav-link"
+                        href="{% url 'tracking' %}"
+                        >Мої замовлення</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <!-- <span class="ti-user"></span> -->
+                      <a
+                        class="nav-link"
+                        href="{% url 'elements' %}"
+                        >Вихід</a
+                      >
+                    </li>
+                  </ul>
                 </li>
                 <li class="nav-item">
                   <a
