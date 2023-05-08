@@ -21,51 +21,84 @@
 	<section class="categories">
 		<div class="container">
 			<div class="row">
+{#            START MY CODE#}
 				<div class="col-xl-3 col-lg-4 col-md-5">
 					<div class="sidebar-categories">
 						<div class="head">Категорії</div>
-	
-	
+
 						<ul class="main-categories">
-							<li class="main-nav-list"><a data-toggle="collapse" href="#meatFish" aria-expanded="false" aria-controls="all2"><span
+							<li class="main-nav-list"><a data-toggle="collapse" href="#all" aria-expanded="false" aria-controls="all2"><span
 									 class="lnr lnr-arrow-right"></span>Всі<span class="number">(28)</span></a>
-								<ul class="collapse" id="meatFish" data-toggle="collapse" aria-expanded="false" aria-controls="meatFish">
-									<li class="main-nav-list child"><a href="#">Спорт<span class="number">(8)</span></a></li>
-									<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(20)</span></a></li>
+                            </li>
+                                <ul class="collapse" id="all" data-toggle="collapse" aria-expanded="false" aria-controls="all">
+                                    {% for category in categories %}
+									<li class="main-nav-list child"><a href="{% url 'category_sort' category_id=category.id %}">{{ category.name }}<span class="number">(8)</span></a></li>
+                                    {% endfor %}
+
 								</ul>
-								<li class="main-nav-list"><a data-toggle="collapse" href="#men" aria-expanded="false" aria-controls="men"><span
-									class="lnr lnr-arrow-right"></span>Чоловіче взуття<span class="number">(10)</span></a>
-								</li>
-								 <ul class="collapse" id="men" data-toggle="collapse" aria-expanded="false" aria-controls="men">
-									 <li class="main-nav-list child"><a href="#">Спорт<span class="number">(3)</span></a></li>
-									 <li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(7)</span></a></li>
-								 </ul>
-							</li>
-							<li class="main-nav-list"><a data-toggle="collapse" href="#woman" aria-expanded="false" aria-controls="woman"><span
-									 class="lnr lnr-arrow-right"></span>Жіноче взуття<span class="number">(11)</span></a>
-									 <ul class="collapse" id="woman" data-toggle="collapse" aria-expanded="false" aria-controls="woman">
-										<li class="main-nav-list child"><a href="#">Спорт<span class="number">(4)</span></a></li>
-										<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(7)</span></a></li>
-									</ul>
-							</li>
-							<li class="main-nav-list"><a data-toggle="collapse" href="#kids" aria-expanded="false" aria-controls="kids"><span
-									 class="lnr lnr-arrow-right"></span>Дитяче взуття<span class="number">(10)</span></a>
-									 <ul class="collapse" id="kids" data-toggle="collapse" aria-expanded="false" aria-controls="kids">
-										<li class="main-nav-list child"><a href="#">Спорт<span class="number">(2)</span></a></li>
-										<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(8)</span></a></li>
-									</ul>
-							</li>
-							<li class="main-nav-list"><a data-toggle="collapse" href="#care" aria-expanded="false" aria-controls="care"><span
-									 class="lnr lnr-arrow-right"></span>Засоби для догляду<span class="number">(7)</span></a>
-							</li>
-	
-							<li class="main-nav-list"><a data-toggle="collapse" href="#accessories" aria-expanded="false" aria-controls="accessories"><span
-								class="lnr lnr-arrow-right"></span>Аксесуари до взуття<span class="number">(5)</span></a>
-								 </li>
-							</ul>
-							</li>
-						</ul>
-					</div>
+                                   {% for category in categories %}
+                                        <li class="main-nav-list"><a data-toggle="collapse" href="#{{ category.id }}" aria-expanded="false" aria-controls="{{ category.id }}"><span
+                                            class="lnr lnr-arrow-right"></span>{{ category.name }}<span class="number">(10)</span></a>
+{#                                        </li>#}
+                                        <ul class="collapse" id="{{ category.id }}" data-toggle="collapse" aria-expanded="false" aria-controls="{{ category.id }}">
+
+
+{#                                            TODO NOT WORKS SUBCATEGORY! #}
+
+
+
+                                    {% for subcategory in sub_categories %}
+                                        {% if subcategory.parent_id == category.id %}
+                                            <li class="main-nav-list child"><a href="{{ subcategory.id }}">{{ subcategory.name }}<span class="number">(3)</span></a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                       </ul>
+                                        </li>
+                                   {% endfor %}
+                                    </ul>
+                    </div>
+
+{#                END MY CODE#}
+
+
+{#                            <li class="main-nav-list"><a data-toggle="collapse" href="{% url "category" %}" aria-expanded="false" aria-controls="all2"><span#}
+{#									 class="lnr lnr-arrow-right"></span>Всі<span class="number">(28)</span></a>#}
+{#								<ul class="collapse" id="meatFish" data-toggle="collapse" aria-expanded="false" aria-controls="meatFish">#}
+{#									<li class="main-nav-list child"><a href="#">Спорт<span class="number">(8)</span></a></li>#}
+{#									<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(20)</span></a></li>#}
+{#								</ul>#}
+{#								<li class="main-nav-list"><a data-toggle="collapse" href="#men" aria-expanded="false" aria-controls="men"><span#}
+{#									class="lnr lnr-arrow-right"></span>Чоловіче взуття<span class="number">(10)</span></a>#}
+{#								</li>#}
+{#								 <ul class="collapse" id="men" data-toggle="collapse" aria-expanded="false" aria-controls="men">#}
+{#									 <li class="main-nav-list child"><a href="#">Спорт<span class="number">(3)</span></a></li>#}
+{#									 <li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(7)</span></a></li>#}
+{#								 </ul>#}
+{#							</li>#}
+{#							<li class="main-nav-list"><a data-toggle="collapse" href="#woman" aria-expanded="false" aria-controls="woman"><span#}
+{#									 class="lnr lnr-arrow-right"></span>Жіноче взуття<span class="number">(11)</span></a>#}
+{#									 <ul class="collapse" id="woman" data-toggle="collapse" aria-expanded="false" aria-controls="woman">#}
+{#										<li class="main-nav-list child"><a href="#">Спорт<span class="number">(4)</span></a></li>#}
+{#										<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(7)</span></a></li>#}
+{#									</ul>#}
+{#							</li>#}
+{#							<li class="main-nav-list"><a data-toggle="collapse" href="#kids" aria-expanded="false" aria-controls="kids"><span#}
+{#									 class="lnr lnr-arrow-right"></span>Дитяче взуття<span class="number">(10)</span></a>#}
+{#									 <ul class="collapse" id="kids" data-toggle="collapse" aria-expanded="false" aria-controls="kids">#}
+{#										<li class="main-nav-list child"><a href="#">Спорт<span class="number">(2)</span></a></li>#}
+{#										<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(8)</span></a></li>#}
+{#									</ul>#}
+{#							</li>#}
+{#							<li class="main-nav-list"><a data-toggle="collapse" href="#care" aria-expanded="false" aria-controls="care"><span#}
+{#									 class="lnr lnr-arrow-right"></span>Засоби для догляду<span class="number">(7)</span></a>#}
+{#							</li>#}
+{#							<li class="main-nav-list"><a data-toggle="collapse" href="#accessories" aria-expanded="false" aria-controls="accessories"><span#}
+{#								class="lnr lnr-arrow-right"></span>Аксесуари до взуття<span class="number">(5)</span></a>#}
+{#								 </li>#}
+{#							</ul>#}
+{#							</li>#}
+{#						</ul>#}
+{#					</div>#}
 					<div class="sidebar-filter mt-50">
 						<div class="top-filter-head">Фільтр</div>
 						<div class="common-filter">
@@ -85,11 +118,13 @@
 							<div class="head">Колір</div>
 							<form action="">
 								<ul>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Чорні<span>(29)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="gray" name="color"><label for="gray">Сірі<span>(29)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="white" name="color"><label for="white">Білі<span>(19)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Золоті<span>(19)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="colorful" name="color"><label for="colorful">Різно-кольорові<span>(19)</span></label></li>
+                                    {% for color in colors %}
+									<li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">{{ color.name }}<span>(29)</span></label></li>
+                                    {% endfor %}
+{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="gray" name="color"><label for="gray">Сірі<span>(29)</span></label></li>#}
+{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="white" name="color"><label for="white">Білі<span>(19)</span></label></li>#}
+{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Золоті<span>(19)</span></label></li>#}
+{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="colorful" name="color"><label for="colorful">Різно-кольорові<span>(19)</span></label></li>#}
 								</ul>
 							</form>
 						</div>
@@ -114,10 +149,13 @@
 					<div class="filter-bar d-flex flex-wrap align-items-center justify-content-between">
 						<div class="sorting">
 							<select>
-								<option value="1">Найпопулярніші</option>
-								<option value="2">Від дешевих до дорогих</option>
-								<option value="3">Від дорогих до дешевих</option>
-								<option value="4">Знижки</option>
+                                {% for category in categories %}
+                                <option href="{% url 'category_sort' category_id=category.id %}">category.name</option>
+{#								<option value="1">Найпопулярніші</option>#}
+{#								<option value="2">Від дешевих до дорогих</option>#}
+{#								<option value="3">Від дорогих до дешевих</option>#}
+{#								<option value="4">Знижки</option>#}
+                                {% endfor %}
 							</select>
 						</div>
 						<div class="pagination">
@@ -145,22 +183,23 @@
 					<section class="lattest-product-area pb-40 category-list">
 						<div class="row">
 							<!-- single product -->
+                            {% for shoes in object_list %}
 							<div class="col-lg-4 col-md-6">
 								<div class="single-product">
-									<img class="img-fluid" src="{% static 'img/product/p1.jpg'%}" alt="">
-									<div class="product-details">
-										<h6>Nike New Hammer sole
-										for Sports person</h6>
+									<img class="img-fluid" src="{{ shoes.image.url }}" alt="">
+									<div class="product-details" >
+										<h6>{{ shoes.name }}
+										<br> {{ shoes.model }}</h6>
 									<div class="price">
-										<h6>$250.00</h6>
-										<h6 class="l-through">$310.00</h6>
+										<h6>{{ shoes.discount }}</h6>
+										<h6 class="l-through">{{ shoes.price }}</h6>
 									</div>
 									<div class="prd-bottom">
-										<a href="cart.html" class="social-info">
+										<a href="{% url 'basket' %}" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Кошик</p>
 										</a>
-										<a href="single-product.html" class="social-info">
+										<a href="{% url 'single_product' id=shoes.id %}" class="social-info">
 											<span class="lnr lnr-move"></span>
 											<p class="hover-text">Подробиці</p>
 											</a>
@@ -168,125 +207,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- single product -->
-							<div class="col-lg-4 col-md-6">
-								<div class="single-product">
-									<img class="img-fluid" src={% static 'img/product/p2.jpg'%} alt="">
-									<div class="product-details">
-										<h6>Nike Air Jordan 1 Retro High OG</h6>
-									<div class="price">
-										<h6>$170.00</h6>
-										<h6 class="l-through">$250.00</h6>
-									</div>
-									<div class="prd-bottom">
-	
-										<a href="cart.html" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Кошик</p>
-										</a>
-										<a href="single-product.html" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Подробиці</p>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- single product -->
-							<div class="col-lg-4 col-md-6">
-								<div class="single-product">
-									<img class="img-fluid" src="{% static 'img/product/p3.jpg'%}" alt="">
-									<div class="product-details">
-										<h6>Nike Blazer Low Platform</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-										<a href="cart.html" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Кошик</p>
-										</a>
-										<a href="single-product.html" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Подробиці</p>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- single product -->
-							<div class="col-lg-4 col-md-6">
-								<div class="single-product">
-									<img class="img-fluid" src="{% static 'img/product/p4.jpg'%}" alt="">
-									<div class="product-details">
-										<h6>Nike Blazer Mid Next Nature</h6>
-									<div class="price">
-										<h6>$130.00</h6>
-										<h6 class="l-through">$200.00</h6>
-									</div>
-									<div class="prd-bottom">
-	
-										<a href="cart.html" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Кошик</p>
-										</a>
-										<a href="single-product.html" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Подробиці</p>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- single product -->
-							<div class="col-lg-4 col-md-6">
-								<div class="single-product">
-									<img class="img-fluid" src="{% static 'img/product/p5.jpg'%}" alt="">
-									<div class="product-details">
-										<h6>Nike Metcon 8</h6>
-									<div class="price">
-										<h6>$270.00</h6>
-										<h6 class="l-through">$350.00</h6>
-									</div>
-									<div class="prd-bottom">
-	
-										<a href="cart.html" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Кошик</p>
-										</a>
-										<a href="single-product.html" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Подробиці</p>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- single product -->
-							<div class="col-lg-4 col-md-6">
-								<div class="single-product">
-									<img class="img-fluid" src="{% static 'img/product/p6.jpg'%}" alt="">
-									<div class="product-details">
-										<h6>Nike Pegasus Turbo Next Nature</h6>
-									<div class="price">
-										<h6>$110.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-	
-										<a href="cart.html" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Кошик</p>
-										</a>
-										<a href="single-product.html" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Подробиці</p>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
+                            {% endfor %}
 						</div>
 					</section>
 					<!-- End Best Seller -->
