@@ -18,10 +18,10 @@
 		</div>
 	</section>
 	<!-- End Banner Area -->
-	<section class="categories">
-		<div class="container">
-			<div class="row">
-{#            START MY CODE#}
+    {#            START MY CODE#}
+    <section class="categories">
+        <div class="container">
+            <div class="row">
 				<div class="col-xl-3 col-lg-4 col-md-5">
 					<div class="sidebar-categories">
 						<div class="head">Категорії</div>
@@ -29,119 +29,137 @@
 						<ul class="main-categories">
 							<li class="main-nav-list"><a data-toggle="collapse" href="#all" aria-expanded="false" aria-controls="all2"><span
 									 class="lnr lnr-arrow-right"></span>Всі<span class="number">(28)</span></a>
-                            </li>
                                 <ul class="collapse" id="all" data-toggle="collapse" aria-expanded="false" aria-controls="all">
                                     {% for category in categories %}
 									<li class="main-nav-list child"><a href="{% url 'category_sort' category_id=category.id %}">{{ category.name }}<span class="number">(8)</span></a></li>
                                     {% endfor %}
-
 								</ul>
-                                   {% for category in categories %}
-                                        <li class="main-nav-list"><a data-toggle="collapse" href="#{{ category.id }}" aria-expanded="false" aria-controls="{{ category.id }}"><span
-                                            class="lnr lnr-arrow-right"></span>{{ category.name }}<span class="number">(10)</span></a>
-{#                                        </li>#}
-                                        <ul class="collapse" id="{{ category.id }}" data-toggle="collapse" aria-expanded="false" aria-controls="{{ category.id }}">
+                                </ul>
 
+                                    {% for category in categories %}
+                                    <ul class="main-categories">
+                                        <li class="main-nav-list"><a data-toggle="collapse" href="#{{ category.name }}" aria-expanded="false" aria-controls="{{ category.id }}"><span
+                                                class="lnr lnr-arrow-right"></span>{{ category.name }}<span class="number">(28)</span></a>
+                                            <ul class="collapse" id="{{ category.name }}" data-toggle="collapse" aria-expanded="false" aria-controls="{{ category.name }}">
 
-{#                                            TODO NOT WORKS SUBCATEGORY! #}
-
-
-
-                                    {% for subcategory in sub_categories %}
-                                        {% if subcategory.parent_id == category.id %}
-                                            <li class="main-nav-list child"><a href="{{ subcategory.id }}">{{ subcategory.name }}<span class="number">(3)</span></a></li>
-                                        {% endif %}
-                                    {% endfor %}
-                                       </ul>
-                                        </li>
-                                   {% endfor %}
+                                                {% for subcategory in sub_categories %}
+                                                {% if subcategory.parent_id == category.id %}
+                                                <li class="main-nav-list child"><a href="{{ subcategory.id }}">{{ subcategory.name }}<span class="number">(8)</span></a></li>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </ul>
                                     </ul>
+                                    {% endfor %}
+                                    </ul>
+
                     </div>
 
-{#                END MY CODE#}
-
-
-{#                            <li class="main-nav-list"><a data-toggle="collapse" href="{% url "category" %}" aria-expanded="false" aria-controls="all2"><span#}
-{#									 class="lnr lnr-arrow-right"></span>Всі<span class="number">(28)</span></a>#}
-{#								<ul class="collapse" id="meatFish" data-toggle="collapse" aria-expanded="false" aria-controls="meatFish">#}
-{#									<li class="main-nav-list child"><a href="#">Спорт<span class="number">(8)</span></a></li>#}
-{#									<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(20)</span></a></li>#}
-{#								</ul>#}
-{#								<li class="main-nav-list"><a data-toggle="collapse" href="#men" aria-expanded="false" aria-controls="men"><span#}
-{#									class="lnr lnr-arrow-right"></span>Чоловіче взуття<span class="number">(10)</span></a>#}
-{#								</li>#}
-{#								 <ul class="collapse" id="men" data-toggle="collapse" aria-expanded="false" aria-controls="men">#}
-{#									 <li class="main-nav-list child"><a href="#">Спорт<span class="number">(3)</span></a></li>#}
-{#									 <li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(7)</span></a></li>#}
-{#								 </ul>#}
-{#							</li>#}
-{#							<li class="main-nav-list"><a data-toggle="collapse" href="#woman" aria-expanded="false" aria-controls="woman"><span#}
-{#									 class="lnr lnr-arrow-right"></span>Жіноче взуття<span class="number">(11)</span></a>#}
-{#									 <ul class="collapse" id="woman" data-toggle="collapse" aria-expanded="false" aria-controls="woman">#}
-{#										<li class="main-nav-list child"><a href="#">Спорт<span class="number">(4)</span></a></li>#}
-{#										<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(7)</span></a></li>#}
-{#									</ul>#}
-{#							</li>#}
-{#							<li class="main-nav-list"><a data-toggle="collapse" href="#kids" aria-expanded="false" aria-controls="kids"><span#}
-{#									 class="lnr lnr-arrow-right"></span>Дитяче взуття<span class="number">(10)</span></a>#}
-{#									 <ul class="collapse" id="kids" data-toggle="collapse" aria-expanded="false" aria-controls="kids">#}
-{#										<li class="main-nav-list child"><a href="#">Спорт<span class="number">(2)</span></a></li>#}
-{#										<li class="main-nav-list child"><a href="#">Повсякденне<span class="number">(8)</span></a></li>#}
-{#									</ul>#}
-{#							</li>#}
-{#							<li class="main-nav-list"><a data-toggle="collapse" href="#care" aria-expanded="false" aria-controls="care"><span#}
-{#									 class="lnr lnr-arrow-right"></span>Засоби для догляду<span class="number">(7)</span></a>#}
-{#							</li>#}
-{#							<li class="main-nav-list"><a data-toggle="collapse" href="#accessories" aria-expanded="false" aria-controls="accessories"><span#}
-{#								class="lnr lnr-arrow-right"></span>Аксесуари до взуття<span class="number">(5)</span></a>#}
-{#								 </li>#}
-{#							</ul>#}
-{#							</li>#}
-{#						</ul>#}
-{#					</div>#}
 					<div class="sidebar-filter mt-50">
 						<div class="top-filter-head">Фільтр</div>
-						<div class="common-filter">
-							<div class="head">Модель</div>
-							<form action="#">
-								<ul>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="all" name="model"><label for="all">Всі</label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="airmax" name="model"><label for="airmax">Air Max</label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="lebron" name="model"><label for="lebron">LeBron</label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="airjordan" name="model"><label for="airjordan">Air Jordan</label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="blazer" name="model"><label for="blazer">Blazer</label></li>
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="metcon" name="model"><label for="metcon">Metcon</label></li>
-								</ul>
-							</form>
-						</div>
-						<div class="common-filter">
-							<div class="head">Колір</div>
-							<form action="">
-								<ul>
-                                    {% for color in colors %}
-									<li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">{{ color.name }}<span>(29)</span></label></li>
-                                    {% endfor %}
-{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="gray" name="color"><label for="gray">Сірі<span>(29)</span></label></li>#}
-{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="white" name="color"><label for="white">Білі<span>(19)</span></label></li>#}
-{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Золоті<span>(19)</span></label></li>#}
-{#									<li class="filter-list"><input class="pixel-radio" type="radio" id="colorful" name="color"><label for="colorful">Різно-кольорові<span>(19)</span></label></li>#}
-								</ul>
-							</form>
-						</div>
-						<div class="common-filter">
-							<div class="head">Ціна</div>
-							<div class="price-range-area">
-								<div id="price-range"></div>
-								<div class="value-wrapper d-flex">
-									<div class="price">Ціна:</div>
-									<span>$</span>
-									<div id="lower-value"></div>
-									<div class="to">до</div>
-									<span>$</span>
-									<div id="upper-value"></div>
-								</div>
-							</div>
-						</div>
+                        <div class="common-filter">
+                            <form action="{% url 'category' %}">
+                                <div class="filter-group">
+                                    <div class="filter-section">
+                                        <div class="head">Бренд</div>
+                                        <ul>
+                                            {% for brand in brands %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ brand.id }}" name="brand" value="{{ brand.id }}">
+                                                <label for="{{ brand.id }}">{{ brand.name }}</label></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-section">
+                                        <div class="head">Колір</div>
+                                        <ul>
+                                            {% for color in colors %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ color.id }}" name="color" value="{{ color.id }}">
+                                                <label for="{{ color.id }}">{{ color.name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-section">
+                                        <div class="head">Матеріал</div>
+                                        <ul>
+                                            {% for material in materials %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ material.id }}" name="material" value="{{ material.id }}">
+                                                <label for="{{ material.id }}">{{ material.name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                     <div class="filter-section">
+                                        <div class="head">Стать</div>
+                                        <ul>
+                                            {% for gender in genders %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ gender.id }}" name="gender" value="{{ gender.id }}">
+                                                <label for="{{ gender.id }}">{{ gender.name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-section">
+                                        <div class="head">Застосування</div>
+                                        <ul>
+                                            {% for application in applications %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ application.id }}" name="application" value="{{ application.id }}">
+                                                <label for="{{ application.id }}">{{ application.name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-section">
+                                        <div class="head">Тип</div>
+                                        <ul>
+                                            {% for type in types %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ type.id }}" name="type" value="{{ type.id }}">
+                                                <label for="{{ type.id }}">{{ type.name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-section">
+                                        <div class="head">Розмір</div>
+                                        <ul>
+                                            {% for size in sizes %}
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="{{ size.id }}" name="size" value="{{ size.id }}">
+                                                <label for="{{ size.id }}">{{ size.name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-section">
+                                        <div class="head">Ціна</div>
+                                        <div class="price-range-area">
+                                            <div id="price-range"></div>
+                                            <div class="value-wrapper d-flex">
+                                                <div class="price">Ціна:</div>
+                                                <span>$</span>
+                                                <div id="lower-value"></div>
+                                                <div class="to">до</div>
+                                                <span>$</span>
+                                                <div id="upper-value"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="filter-bar" style="margin-top: 35px" type="submit">Застосувати</button>
+                            </form>
+                        </div>
 					</div>
 				</div>
 				<div class="col-xl-9 col-lg-8 col-md-7">
@@ -149,13 +167,13 @@
 					<div class="filter-bar d-flex flex-wrap align-items-center justify-content-between">
 						<div class="sorting">
 							<select>
-                                {% for category in categories %}
-                                <option href="{% url 'category_sort' category_id=category.id %}">category.name</option>
-{#								<option value="1">Найпопулярніші</option>#}
-{#								<option value="2">Від дешевих до дорогих</option>#}
-{#								<option value="3">Від дорогих до дешевих</option>#}
-{#								<option value="4">Знижки</option>#}
-                                {% endfor %}
+{#                                {% for category in categories %}#}
+{#                                <option href="{% url 'category_sort' category_id=category.id %}">category.name</option>#}
+								<option value="1">Найпопулярніші</option>
+								<option value="2">Від дешевих до дорогих</option>
+								<option value="3">Від дорогих до дешевих</option>
+								<option value="4">Знижки</option>
+{#                                {% endfor %}#}
 							</select>
 						</div>
 						<div class="pagination">
@@ -169,37 +187,37 @@
 						</div>
 
 						<div class="search_input" id="search_input">
-							<form class="d-flex justify-content-between">								
-								<input type="text" class="form-control" id="search_input" placeholder="Впишіть назву товару">
+							<form action="{% url "category" %}" method="post" class="d-flex justify-content-between">
+                            {% csrf_token %}
+                            {{ item_form }}
 								<button type="submit" class="btn">Пошук</button>
 								{% comment %} <span class="lnr lnr-cross" id="close_search" title="Close Search"></span> {% endcomment %}
 							</form>
 						</div>
-						{% comment %} search {% endcomment %}
-
 					</div>
 					<!-- End Filter Bar -->
 					<!-- Start Best Seller -->
 					<section class="lattest-product-area pb-40 category-list">
 						<div class="row">
 							<!-- single product -->
-                            {% for shoes in object_list %}
+                            {% if object_list %}
+                            {% for item in object_list %}
 							<div class="col-lg-4 col-md-6">
 								<div class="single-product">
-									<img class="img-fluid" src="{{ shoes.image.url }}" alt="">
+									<img class="img-fluid" src="{{ item.image.url }}" alt="">
 									<div class="product-details" >
-										<h6>{{ shoes.name }}
-										<br> {{ shoes.model }}</h6>
+										<h6>{{ item.name }}
+										<br> {{ item.model }}</h6>
 									<div class="price">
-										<h6>{{ shoes.discount }}</h6>
-										<h6 class="l-through">{{ shoes.price }}</h6>
+										<h6>{{ item.discount }}</h6>
+										<h6 class="l-through">{{ item.price }}</h6>
 									</div>
 									<div class="prd-bottom">
 										<a href="{% url 'basket' %}" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Кошик</p>
 										</a>
-										<a href="{% url 'single_product' id=shoes.id %}" class="social-info">
+										<a href="{% url 'single_product' id=item.id %}" class="social-info">
 											<span class="lnr lnr-move"></span>
 											<p class="hover-text">Подробиці</p>
 											</a>
@@ -208,6 +226,13 @@
 								</div>
 							</div>
                             {% endfor %}
+                            {% else %}
+                            <div class="col-md-6" style="">
+								<div class="single-product" style="margin-top: 85px; display: flex; justify-content: center; align-items: center; ">
+                                    Пробачте але по вашому запросу нічого не знайдено.
+                                </div>
+							</div>
+                            {% endif %}
 						</div>
 					</section>
 					<!-- End Best Seller -->

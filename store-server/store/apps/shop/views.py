@@ -1,21 +1,21 @@
 from django.shortcuts import render
 from django.apps import apps
+from django.db.models import Q
 from django.core.mail import send_mail
 
 from apps.auth.models import MailDistribution
-from .forms import SubscribeForm
+from .forms import SubscribeForm, ItemFiltrationForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 from django.views.generic import TemplateView, ListView
 from django.views.generic.list import MultipleObjectMixin
 from .models import MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner, Item, Category, SubCategory, \
-    Color
+    Color, Brand, Gender, Material, Application, Type, Size
 from django.db.utils import IntegrityError
 
 
-
-def get_model(name:str, app = 'shop'):
+def get_model(name: str, app='shop'):
     context = apps.get_model(app, name)
     return context.objects.all()
 
@@ -32,6 +32,7 @@ def mail_send(request):
         return render(request, '/')
 
     return render(request, '/')
+
 
 def get_famous_dict():
     return {
@@ -70,6 +71,7 @@ class MyBaseView(ListView):
             finally:
                 return self.get(request, *args, **kwargs)
 
+
 class IndexView(MyBaseView):
     template_name = 'shop/index.html'
 
@@ -80,58 +82,58 @@ class IndexView(MyBaseView):
         context = super().get_context_data(**kwargs)
         context['banner'] = MainBanner.objects.all()
         context['features'] = [
-                    {
-                        'name_feature': 'Безкоштовна доставка',
-                        'description_futures': 'Безкоштовна доставка на всі замовлення',
-                        'link_feature': 'img/features/f-icon1.png'
-                    },
-                    {
-                        'name_feature': 'Політика повернення',
-                        'description_futures': 'Безкоштовне повернення на всі замовлення',
-                        'link_feature': 'img/features/f-icon2.png'
-                    },
-                    {
-                        'name_feature': '24/7 підтримка',
-                        'description_futures': 'Цілодобова підтримка',
-                        'link_feature': 'img/features/f-icon3.png'
-                    },
-                    {
-                        'name_feature': 'Безпечна оплата',
-                        'description_futures': 'Безпечна оплата всіх товарів',
-                        'link_feature': 'img/features/f-icon4.png'
-                    }
-                ]
+            {
+                'name_feature': 'Безкоштовна доставка',
+                'description_futures': 'Безкоштовна доставка на всі замовлення',
+                'link_feature': 'img/features/f-icon1.png'
+            },
+            {
+                'name_feature': 'Політика повернення',
+                'description_futures': 'Безкоштовне повернення на всі замовлення',
+                'link_feature': 'img/features/f-icon2.png'
+            },
+            {
+                'name_feature': '24/7 підтримка',
+                'description_futures': 'Цілодобова підтримка',
+                'link_feature': 'img/features/f-icon3.png'
+            },
+            {
+                'name_feature': 'Безпечна оплата',
+                'description_futures': 'Безпечна оплата всіх товарів',
+                'link_feature': 'img/features/f-icon4.png'
+            }
+        ]
         context['category'] = [
-                    {
-                        'name': 'Nike Court Vision Mid Next Nature',
-                        'link_photo': 'img/category/c1.jpg',
-                        'link_category': 'single_product',
-                        'class': 'col-lg-8 col-md-8',
-                    },
-                    {
-                        'name': 'Nike Court Vision Low Next Nature',
-                        'link_photo': 'img/category/c2.jpg',
-                        'link_category': 'single_product',
-                        'class': 'col-lg-4 col-md-4',
-                    },
-                    {
-                        'name': "Nike Air Force 1 '07",
-                        'link_photo': 'img/category/c3.jpg',
-                        'link_category': 'single_product',
-                        'class': 'col-lg-4 col-md-4',
-                    },
-                    {
-                        'name': 'Air Jordan 1 Low',
-                        'link_photo': 'img/category/c4.jpg',
-                        'link_category': 'single_product',
-                        'class': 'col-lg-8 col-md-8',
-                    },
-                ]
+            {
+                'name': 'Nike Court Vision Mid Next Nature',
+                'link_photo': 'img/category/c1.jpg',
+                'link_category': 'single_product',
+                'class': 'col-lg-8 col-md-8',
+            },
+            {
+                'name': 'Nike Court Vision Low Next Nature',
+                'link_photo': 'img/category/c2.jpg',
+                'link_category': 'single_product',
+                'class': 'col-lg-4 col-md-4',
+            },
+            {
+                'name': "Nike Air Force 1 '07",
+                'link_photo': 'img/category/c3.jpg',
+                'link_category': 'single_product',
+                'class': 'col-lg-4 col-md-4',
+            },
+            {
+                'name': 'Air Jordan 1 Low',
+                'link_photo': 'img/category/c4.jpg',
+                'link_category': 'single_product',
+                'class': 'col-lg-8 col-md-8',
+            },
+        ]
         context['sales'] = {
-                    'name': 'Розпродаж',
-                    'link_photo': 'img/category/c5.jpg',
-                    'link_category': 'single_product',
-                }
+            'name': 'Розпродаж',
+            'link_photo': 'img/category/c5.jpg',
+            'link_category': 'single_product',
+        }
         context['product_slider_new'] = {
             'name_slide':
                 {
@@ -146,7 +148,7 @@ class IndexView(MyBaseView):
                     'title': 'Розпродаж', 'discription': 'Шалені ціни, на шалені кросовки!'
                 },
             'shoes': SaleBanner.objects.all()
-            }
+        }
 
         context['exclusive'] = {
             'deal':
@@ -170,11 +172,10 @@ class IndexView(MyBaseView):
             {'link': 'img/brand/3.png'},
             {'link': 'img/brand/4.png'},
             {'link': 'img/brand/5.png'},
-            ]
+        ]
         context.update({'subscribe_form': SubscribeForm()})
         print(context)
         return context
-
 
     # def post(self, request, *args, **kwargs):
     #     form = SubscribeForm(data=request.POST)
@@ -189,7 +190,6 @@ class IndexView(MyBaseView):
     #             messages.add_message(request, messages.INFO, 'Ви вже є в базі!')
     #         finally:
     #             return self.get(request, *args, **kwargs)
-
 
 
 # def index(request):
@@ -323,15 +323,86 @@ class CategoryView(MyBaseView):
     paginate_by = 5
     queryset = Item.objects.all()
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        brand = self.request.GET.getlist('brand')
+        color = self.request.GET.getlist('color')
+        material = self.request.GET.getlist('material')
+        gender = self.request.GET.getlist('gender')
+        application = self.request.GET.getlist('application')
+        type = self.request.GET.getlist('type')
+        size = self.request.GET.getlist('size')
+
+        if brand:
+            queryset = Item.objects.filter(brand_id__in=brand)
+
+        if color:
+            queryset = queryset.filter(colors__in=color)
+
+        if material:
+            queryset = queryset.filter(materials__in=material)
+
+        if gender:
+            queryset = queryset.filter(gender_id__in=gender)
+
+        if application:
+            queryset = queryset.filter(applications__in=application)
+
+        if type:
+            queryset = queryset.filter(types__in=type)
+
+        if size:
+            queryset = queryset.filter(size__in=size)
+
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({'subscribe_form': SubscribeForm()})
-        context['shoes'] = Item.objects.all()
+        context['applications'] = Application.objects.all()
+        context['sizes'] = Size.objects.all()
         context['categories'] = Category.objects.all()
         context['sub_categories'] = SubCategory.objects.all()
         context['colors'] = Color.objects.all()
+        context['brands'] = Brand.objects.all()
+        context['genders'] = Gender.objects.all()
+        context['materials'] = Material.objects.all()
+        context['item_form'] = ItemFiltrationForm()
+        context['types'] = Type.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = ItemFiltrationForm(data=request.POST)
+        if form.is_valid():
+            item_name = request.POST['search_input']
+            try:
+                self.queryset = Item.objects.filter(Q(name__icontains=item_name) |
+                                                    Q(model__icontains=item_name) |
+                                                    Q(name__icontains=f" {item_name} ") |
+                                                    Q(model__icontains=f" {item_name} "))
+            except Exception as exc:
+                print(exc)
+            finally:
+                return self.get(request, *args, **kwargs)
+
+class CategorySortView(CategoryView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs['category_id']
+        self.queryset = self.queryset.filter(category_id=category_id)
+        context['object_list'] = self.queryset
         print(context)
         return context
+
+class SubCategorySortView(CategoryView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        subcategory_id = self.kwargs['subcategory_id']
+        self.queryset = self.queryset.filter(subcategory=subcategory_id)
+        context['object_list'] = self.queryset
+        return context
+
 
 
 class SingleProductView(MyBaseView):
