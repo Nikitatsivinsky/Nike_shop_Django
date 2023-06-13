@@ -1,13 +1,15 @@
 const rangeSlider = document.getElementById('range-slider');
+const rangeSliderInputMin = parseInt(document.getElementById('input-0').getAttribute('min'));
+const rangeSliderInputMax = parseInt(document.getElementById('input-1').getAttribute('max'));
 
 if (rangeSlider) {
 	noUiSlider.create(rangeSlider, {
-    start: [100, 99999],
+    start: [rangeSliderInputMin, rangeSliderInputMax],
 		connect: true,
 		step: 1,
     range: {
-			'min': [100],
-			'max': [99999]
+			'min': rangeSliderInputMin,
+			'max': rangeSliderInputMax
     }
 	});
 

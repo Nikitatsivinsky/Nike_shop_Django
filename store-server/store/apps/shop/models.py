@@ -132,7 +132,7 @@ class Item(models.Model):
     in_stock = models.IntegerField(verbose_name='На складі')
     length_cm = models.IntegerField(null=True, blank=True, verbose_name='Довжина')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Ціна')
-    discount = models.DecimalField(max_digits=8, decimal_places=2, null=True, verbose_name='Знижка')
+    discount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, verbose_name='Знижка')
     size = models.ManyToManyField('Size', verbose_name='Розміри')
     weight = models.IntegerField(verbose_name='Вага')
     year = models.IntegerField(null=True, blank=True, verbose_name='Рік')
