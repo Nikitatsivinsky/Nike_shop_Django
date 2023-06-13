@@ -34,8 +34,13 @@
                                     {{ shoes.subject.name }} {{ shoes.subject.model }}
                                 </a>
                                 <div class="price">
+                                    {% if shoes.subject.discount %}
                                     <h6>{{ shoes.subject.discount}}</h6>
                                     <h6 class="l-through">{{ shoes.subject.price }}</h6>
+                                    {% else %}
+                                    <h6>{{ shoes.subject.price }}</h6>
+                                    {% endif %}
+
                                 </div>
                             </div>
                         </div>

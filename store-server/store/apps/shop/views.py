@@ -59,8 +59,9 @@ class MyBaseView(ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        form = SubscribeForm(data=request.POST)
-        if form.is_valid():
+        print('inside MyBaseView')
+        form_subcribe = SubscribeForm(data=request.POST)
+        if form_subcribe.is_valid():
             email = request.POST['email']
             try:
                 mail_dis = MailDistribution()
@@ -321,7 +322,7 @@ class IndexView(MyBaseView):
 
 class CategoryView(MyBaseView):
     template_name = 'shop/category.html'
-    paginate_by = 4
+    paginate_by = 12
     queryset = Item.objects.all()
 
     def get_queryset(self):
@@ -395,16 +396,19 @@ class CategoryView(MyBaseView):
         discount_items = self.queryset.filter(discount__isnull=False).values_list('discount', flat=True)
         price_items = self.queryset.values_list('price', flat=True)
 
-        if min(discount_items) < min(price_items):
-            context['min_price'] = min(discount_items)
-        else:
-            context['min_price'] = min(price_items)
+        try:
+            if min(discount_items) < min(price_items):
+                context['min_price'] = min(discount_items)
+            else:
+                context['min_price'] = min(price_items)
 
-        if max(discount_items) > max(price_items):
-
-            context['max_price'] = max(discount_items)
-        else:
-            context['max_price'] = max(price_items)
+            if max(discount_items) > max(price_items):
+                context['max_price'] = max(discount_items)
+            else:
+                context['max_price'] = max(price_items)
+        except ValueError:
+            context['max_price'] = 0
+            context['min_price'] = 0
 
         paginator = Paginator(self.get_queryset(), self.paginate_by)
         page = self.request.GET.get('page')
@@ -421,9 +425,9 @@ class CategoryView(MyBaseView):
         return context
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
-        form = ItemFiltrationForm(data=request.POST)
-        if form.is_valid():
+
+        form_filtration = ItemFiltrationForm(data=request.POST)
+        if form_filtration.is_valid():
             item_name = request.POST['search_input']
             try:
                 self.queryset = Item.objects.filter(Q(name__icontains=item_name) |
@@ -434,6 +438,9 @@ class CategoryView(MyBaseView):
                 print(exc)
             finally:
                 return self.get(request, *args, **kwargs)
+
+        return super().post(request, *args, **kwargs)
+
 
 
 class CategorySortView(CategoryView):
