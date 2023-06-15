@@ -1,4 +1,5 @@
 const rangeSlider = document.getElementById('range-slider');
+
 const rangeSliderInputMin = parseInt(document.getElementById('input-0').getAttribute('min'));
 const rangeSliderInputMax = parseInt(document.getElementById('input-1').getAttribute('max'));
 

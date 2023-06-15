@@ -11,9 +11,10 @@ from django.http import HttpResponseRedirect
 
 from django.views.generic import TemplateView, ListView
 from django.views.generic.list import MultipleObjectMixin
-from .models import MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner, Item, Category, SubCategory, \
-    Color, Brand, Gender, Material, Application, Type, Size
+from apps.other.models import MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner
+from .models import Item, Category, SubCategory, Color, Brand, Gender, Material, Application, Type, Size, ImagesItem
 from django.db.utils import IntegrityError
+
 
 
 def get_model(name: str, app='shop'):
@@ -179,146 +180,6 @@ class IndexView(MyBaseView):
         print(context)
         return context
 
-    # def post(self, request, *args, **kwargs):
-    #     form = SubscribeForm(data=request.POST)
-    #     if form.is_valid():
-    #         email = request.POST['email']
-    #         try:
-    #             mail_dis = MailDistribution()
-    #             mail_dis.email = email
-    #             mail_dis.save()
-    #             messages.add_message(request, messages.INFO, 'Ви успішно підписались!')
-    #         except IntegrityError:
-    #             messages.add_message(request, messages.INFO, 'Ви вже є в базі!')
-    #         finally:
-    #             return self.get(request, *args, **kwargs)
-
-
-# def index(request):
-#     main_banner = MainBanner.objects.all()
-#     print(main_banner)
-#
-#     context = {
-#         'banner': MainBanner.objects.all(),
-#         'features':
-#             [
-#                 {
-#                     'name_feature': 'Безкоштовна доставка',
-#                     'description_futures': 'Безкоштовна доставка на всі замовлення',
-#                     'link_feature': 'img/features/f-icon1.png'
-#                 },
-#                 {
-#                     'name_feature': 'Політика повернення',
-#                     'description_futures': 'Безкоштовне повернення на всі замовлення',
-#                     'link_feature': 'img/features/f-icon2.png'
-#                 },
-#                 {
-#                     'name_feature': '24/7 підтримка',
-#                     'description_futures': 'Цілодобова підтримка',
-#                     'link_feature': 'img/features/f-icon3.png'
-#                 },
-#                 {
-#                     'name_feature': 'Безпечна оплата',
-#                     'description_futures': 'Безпечна оплата всіх товарів',
-#                     'link_feature': 'img/features/f-icon4.png'
-#                 }
-#             ],
-#         'category':
-#             [
-#                 {
-#                     'name': 'Nike Court Vision Mid Next Nature',
-#                     'link_photo': 'img/category/c1.jpg',
-#                     'link_category': 'single_product',
-#                     'class': 'col-lg-8 col-md-8',
-#                 },
-#                 {
-#                     'name': 'Nike Court Vision Low Next Nature',
-#                     'link_photo': 'img/category/c2.jpg',
-#                     'link_category': 'single_product',
-#                     'class': 'col-lg-4 col-md-4',
-#                 },
-#                 {
-#                     'name': "Nike Air Force 1 '07",
-#                     'link_photo': 'img/category/c3.jpg',
-#                     'link_category': 'single_product',
-#                     'class': 'col-lg-4 col-md-4',
-#                 },
-#                 {
-#                     'name': 'Air Jordan 1 Low',
-#                     'link_photo': 'img/category/c4.jpg',
-#                     'link_category': 'single_product',
-#                     'class': 'col-lg-8 col-md-8',
-#                 },
-#             ],
-#         'sales':
-#             {
-#                 'name': 'Розпродаж',
-#                 'link_photo': 'img/category/c5.jpg',
-#                 'link_category': 'single_product',
-#             },
-#         'product_slider_new':
-#             {
-#                 'name_slide':
-#                     {
-#                         'title': 'Новинки магазину', 'discription': 'Останнє надходження магазину!'
-#                     },
-#                 'shoes': get_model('NewesBanner', app='other')
-#             },
-#         'product_slider_sale':
-#             {
-#                 'name_slide':
-#                     {
-#                         'title': 'Розпродаж', 'discription': 'Шалені ціни, на шалені кросовки!'
-#                     },
-#                 'shoes': get_model('SaleBanner', app='other')
-#             },
-#         'exclusive':
-#             {
-#                 'deal':
-#                     {
-#                         'title': 'Скидка на эксклюзиный товар магазина до - 50%',
-#                         'description': 'Наш магазин взуття пропонує виняткову знижку 50% на ексклюзивний товар від '
-#                                        'відомого бренду Nike! Це особлива можливість купити популярні моделі взуття '
-#                                        'Nike за надзвичайно вигідними цінами. Не пропустіть цю можливість зробити '
-#                                        'свої покупки за найкращими цінами!',
-#                         'days': '1',
-#                         'hours': '3',
-#                         'minutes': '2',
-#                         'sec': '37'
-#                     },
-#                 'product': get_model('ExclusiveBanner', app='other')
-#             },
-#         'brands':
-#             [
-#                 {'link': 'img/brand/1.png'},
-#                 {'link': 'img/brand/2.png'},
-#                 {'link': 'img/brand/3.png'},
-#                 {'link': 'img/brand/4.png'},
-#                 {'link': 'img/brand/5.png'},
-#             ],
-#         'famous': {}
-#     }
-#     context.update(get_famous_dict())
-#
-#     if request.method == 'POST':
-#         print(request)
-#         form = SubscribeForm(data=request.POST)
-#         if form.is_valid():
-#             email = request.POST['email']
-#             try:
-#                 mail_dis = MailDistribution()
-#                 mail_dis.email = email
-#                 mail_dis.save()
-#                 messages.add_message(request, messages.INFO, 'Ви успішно підписались!')
-#                 return render(request, 'shop/index.html', context)
-#             except Exception:
-#                 messages.add_message(request, messages.INFO, 'Ви вже є в базі!')
-#                 return render(request, 'shop/index.html', context)
-#
-#     else:
-#         context.update({'subscribe_form': SubscribeForm()})
-#         return render(request, 'shop/index.html', context)
-
 
 class CategoryView(MyBaseView):
     template_name = 'shop/category.html'
@@ -366,6 +227,8 @@ class CategoryView(MyBaseView):
         if price_to:
             queryset = queryset.filter(price__lte=price_to)
 
+        #TODO sort_by cheap, sort_by expensive
+
         if sort_by == 'popular':
             queryset = queryset.order_by('-famous')
         elif sort_by == 'cheap':
@@ -397,18 +260,22 @@ class CategoryView(MyBaseView):
         price_items = self.queryset.values_list('price', flat=True)
 
         try:
-            if min(discount_items) < min(price_items):
-                context['min_price'] = min(discount_items)
-            else:
-                context['min_price'] = min(price_items)
+            if discount_items:
+                if min(discount_items) < min(price_items):
+                    context['min_price'] = min(discount_items)
+                else:
+                    context['min_price'] = min(price_items)
 
-            if max(discount_items) > max(price_items):
-                context['max_price'] = max(discount_items)
+                if max(discount_items) > max(price_items):
+                    context['max_price'] = max(discount_items)
+                else:
+                    context['max_price'] = max(price_items)
             else:
                 context['max_price'] = max(price_items)
+                context['min_price'] = min(price_items)-1
         except ValueError:
-            context['max_price'] = 0
-            context['min_price'] = 0
+            context['max_price'] = 1
+            context['min_price'] = 99999
 
         paginator = Paginator(self.get_queryset(), self.paginate_by)
         page = self.request.GET.get('page')
@@ -465,6 +332,21 @@ class SubCategorySortView(CategoryView):
 class SingleProductView(MyBaseView):
     template_name = 'shop/single-product.html'
     queryset = Item.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        uuid = self.kwargs['uuid']
+        self.queryset = self.queryset.filter(id=uuid)
+        context['single_object'] = self.queryset.first()
+        context['applications'] = context['single_object'].applications.all()
+        context['item_images'] = ImagesItem.objects.filter(entity_id=uuid).all()
+        print(context)
+
+        return context
+
+
+
+
 
 # def category(request):
 #     context = {}

@@ -125,14 +125,14 @@ class Item(models.Model):
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, verbose_name='Стать')
     materials = models.ManyToManyField('Material', verbose_name='Матеріал')
     types = models.ManyToManyField('Type', verbose_name='Тип')
-    image = models.ImageField(upload_to='product_image/', verbose_name='Фото',
+    image = models.ImageField(upload_to='product_image', verbose_name='Фото',
                               help_text="Рекомендований розмір зображення 655x395")
     description = models.TextField(verbose_name='Опис')
     famous = models.IntegerField(verbose_name='Популярність')
     in_stock = models.IntegerField(verbose_name='На складі')
     length_cm = models.IntegerField(null=True, blank=True, verbose_name='Довжина')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Ціна')
-    discount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, verbose_name='Знижка')
+    discount = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, verbose_name='Знижка')
     size = models.ManyToManyField('Size', verbose_name='Розміри')
     weight = models.IntegerField(verbose_name='Вага')
     year = models.IntegerField(null=True, blank=True, verbose_name='Рік')
@@ -146,81 +146,94 @@ class Item(models.Model):
         verbose_name_plural = 'Товари'
 
 
-class MainBanner(models.Model):
-    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+class ImagesItem(models.Model):
+    entity = models.ForeignKey(Item, related_name='images', null=True, blank=True, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='product_image/items_photos', null=True, blank=True, verbose_name='Фото')
 
     def __str__(self):
-        return str(self.subject)
+        return str(self.entity)
 
     class Meta:
-        verbose_name = 'Головний банер на головній сторінці'
-        verbose_name_plural = 'Головний банер на головній сторінці'
-        app_label = 'other'
-        db_table = 'main_banner'
+        db_table = 'imageitem'
+        verbose_name = 'Фотографія товару'
+        verbose_name_plural = 'Фотографії товарів'
 
 
-class NewesBanner(models.Model):
-    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
-
-    def __str__(self):
-        return str(self.subject)
-
-    def save(self, *args, **kwargs):
-        if NewesBanner.objects.count() >= settings.MAX_BANNER_COUNT:
-            raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Новинки магазину'")
-        super(NewesBanner, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = 'Банер "Новинки магазину" на головній сторінці'
-        verbose_name_plural = 'Банер "Новинки магазину" на головній сторінці'
-        app_label = 'other'
-        db_table = 'newes_banner'
-
-
-class SaleBanner(models.Model):
-    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
-
-    def __str__(self):
-        return str(self.subject)
-
-    def save(self, *args, **kwargs):
-        if SaleBanner.objects.count() >= settings.MAX_BANNER_COUNT:
-            raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Розпродаж'")
-        super(SaleBanner, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = 'Банер "Розпродаж" на головній сторінці'
-        verbose_name_plural = 'Банер "Розпродаж" на головній сторінці'
-        app_label = 'other'
-        db_table = 'sale_banner'
-
-
-class ExclusiveBanner(models.Model):
-    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
-
-    def __str__(self):
-        return str(self.subject)
-
-    class Meta:
-        verbose_name = 'Банер "Єксклюзивні товари" на головній сторінці'
-        verbose_name_plural = 'Банер "Єксклюзивні товари" на головній сторінці'
-        app_label = 'other'
-        db_table = 'exclusive_banner'
-
-
-class PopularBanner(models.Model):
-    subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
-
-    def __str__(self):
-        return str(self.subject)
-
-    def save(self, *args, **kwargs):
-        if PopularBanner.objects.count() >= settings.MAX_POPULAR_BANNER_COUNT:
-            raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Популярні товари'")
-        super(PopularBanner, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = 'Банер "Популярні товари"'
-        verbose_name_plural = 'Банер "Популярні товари"'
-        app_label = 'other'
-        db_table = 'popular_banner'
+# class MainBanner(models.Model):
+#     subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+#
+#     def __str__(self):
+#         return str(self.subject)
+#
+#     class Meta:
+#         verbose_name = 'Головний банер на головній сторінці'
+#         verbose_name_plural = 'Головний банер на головній сторінці'
+#         app_label = 'other'
+#         db_table = 'main_banner'
+#
+#
+# class NewesBanner(models.Model):
+#     subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+#
+#     def __str__(self):
+#         return str(self.subject)
+#
+#     def save(self, *args, **kwargs):
+#         if NewesBanner.objects.count() >= settings.MAX_BANNER_COUNT:
+#             raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Новинки магазину'")
+#         super(NewesBanner, self).save(*args, **kwargs)
+#
+#     class Meta:
+#         verbose_name = 'Банер "Новинки магазину" на головній сторінці'
+#         verbose_name_plural = 'Банер "Новинки магазину" на головній сторінці'
+#         app_label = 'other'
+#         db_table = 'newes_banner'
+#
+#
+# class SaleBanner(models.Model):
+#     subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+#
+#     def __str__(self):
+#         return str(self.subject)
+#
+#     def save(self, *args, **kwargs):
+#         if SaleBanner.objects.count() >= settings.MAX_BANNER_COUNT:
+#             raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Розпродаж'")
+#         super(SaleBanner, self).save(*args, **kwargs)
+#
+#     class Meta:
+#         verbose_name = 'Банер "Розпродаж" на головній сторінці'
+#         verbose_name_plural = 'Банер "Розпродаж" на головній сторінці'
+#         app_label = 'other'
+#         db_table = 'sale_banner'
+#
+#
+# class ExclusiveBanner(models.Model):
+#     subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+#
+#     def __str__(self):
+#         return str(self.subject)
+#
+#     class Meta:
+#         verbose_name = 'Банер "Єксклюзивні товари" на головній сторінці'
+#         verbose_name_plural = 'Банер "Єксклюзивні товари" на головній сторінці'
+#         app_label = 'other'
+#         db_table = 'exclusive_banner'
+#
+#
+# class PopularBanner(models.Model):
+#     subject = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Назва товару')
+#
+#     def __str__(self):
+#         return str(self.subject)
+#
+#     def save(self, *args, **kwargs):
+#         if PopularBanner.objects.count() >= settings.MAX_POPULAR_BANNER_COUNT:
+#             raise ValidationError("Перевищено ліміт кількості об'єктів моделі Банеру 'Популярні товари'")
+#         super(PopularBanner, self).save(*args, **kwargs)
+#
+#     class Meta:
+#         verbose_name = 'Банер "Популярні товари"'
+#         verbose_name_plural = 'Банер "Популярні товари"'
+#         app_label = 'other'
+#         db_table = 'popular_banner'

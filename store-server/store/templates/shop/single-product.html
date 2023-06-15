@@ -10,11 +10,11 @@
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Nike Lebron Zoom Soldier</h1>
+					<h1>{{ single_object.name }} {{ single_object.model }}</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Головна<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Всі товари<span class="lnr lnr-arrow-right"></span></a>
-						<a href="single-product.html">Nike Lebron Zoom Soldier</a>
+						<a href="{% url 'index' %}">Головна<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{% url 'category' %}">Всі товари<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{{ request.build_absolute_uri }}">{{ single_object.name }} {{ single_object.model }}</a>
 					</nav>
 				</div>
 			</div>
@@ -28,37 +28,61 @@
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 					<div class="s_Product_carousel">
+                        {% for item in item_images %}
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/nikelebronzoomsoldier/lebron_1.jpg' %}" alt="">
+							<img class="img-fluid" src="{{ item.photo.url  }}" alt="">
 						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/nikelebronzoomsoldier/lebron_2.jpg' %}" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/nikelebronzoomsoldier/lebron_3.jpg' %}" alt="">
-						</div>
+                        {% endfor %}
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
-					<div class="s_product_text">
-						<h3>Nike Lebron Zoom Soldier</h3>
-						<h2>$149.99</h2>
+					<div class="s_product_text" >
+						<h3>{{ single_object.name }} {{ single_object.model }}</h3>
+                        <div style="display: flex; align-items: center;">
+                            {% if single_object.discount %}
+                          <h2>₴{{ single_object.discount }}</h2>
+                          <h4 style="margin-left: 20px; color: gray; font-size: 14px; text-decoration: line-through;"><s>{{ single_object.price }}</s></h4>
+                            {% else %}
+                            <h2>₴ {{ single_object.price }}</h2>
+                            {% endif %}
+                        </div>
+
+
+
 						<ul class="list">
-							<li><a class="active" href="#"><span>Категорія</span> : Спорт</a></li>
-							<li><a href="#"><span>Є в наявності</span> : Так</a></li>
+							<li>
+                                <a class="active">
+                                        <span>
+                                            Категорія:
+                                        </span>
+
+                                        <ul>
+                                            {% for application in applications %}
+                                            <li>
+                                                <a href="{% url 'category' %}?application={{ application.id }}">
+                                                   {{ application.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                </a>
+                            </li>
+
+                            <li><a href="{% url 'category' %}?gender={{ single_object.gender_id }}"><span>Стать: {{ single_object.gender }}</span></a></li>
+                            <li><a><span>Є в наявності </span> {% if single_object.in_stock >= 1 %}: Так {% else %}: Ні {% endif %}</a></li>
 						</ul>
-						<p>Nike LeBron Zoom Soldier 8 Flyease Cavs - це модель кросівок, створена спеціально для команди Cleveland Cavaliers, в якій грає Леброн Джеймс. Вони особливо виділяються своєю технологією Flyease, яка забезпечує легке і швидке застегнення через спеціальну систему застібки.</p>
-						<div class="product_count">
-							<label for="qty">Кількість:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
-							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div>
+						<p>{{ single_object.description }}</p>
+{#						<div class="product_count">#}
+{#							<label for="qty">Кількість:</label>#}
+{#							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">#}
+{#							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"#}
+{#							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>#}
+{#							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"#}
+{#							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>#}
+{#						</div>#}
 						<div class="card_area d-flex align-items-center">
 							<a class="primary-btn" href="cart.html">У кошик</a>
-							<a class="icon_btn" href=""><i class="lnr lnr lnr-heart"></i></a>
+{#							<a class="icon_btn" href=""><i class="lnr lnr lnr-heart"></i></a>#}
 						</div>
 					</div>
 				</div>
@@ -79,18 +103,13 @@
 					 aria-selected="false">Специфікація</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-					 aria-selected="false">Коментарі</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					 aria-selected="false">Відгуки</a>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-					<p>Nike Lebron Zoom Soldier — це баскетбольне взуття, спеціально розроблене для спорту. Він має міцну конструкцію з високою верхньою частиною, яка забезпечує підтримку стопи та дозволяє контролювати рух на майданчику. Підошва Zoom Air забезпечує комфортну амортизацію та ефективну передачу енергії. Він також має опору для п’яти, яка допомагає зменшити тиск на п’яту та допомагає контролювати рух. Взуття має спортивний і елегантний дизайн, який виділяє його.</p>
-					<p>Крім того, Nike Lebron Zoom Soldier має унікальну систему шнурівки, яка забезпечує індивідуальну посадку та надійну фіксацію стопи. Підошва виконана з гуми, що забезпечує міцність і зчеплення з майданчиком. Взуття також має легку конструкцію, що робить його зручним для тривалого носіння та дозволяє швидко пересуватися на майданчику. Взуття розроблено з підписом Леброна Джеймса на язиці. Він доступний у різних кольорах і ідеально підходить для баскетболістів, які шукають взуття, яке забезпечує підтримку, зчеплення та контроль.</p>
+					<p>{{ single_object.description }}</p>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="table-responsive">
@@ -101,23 +120,7 @@
 										<h5>Ширина</h5>
 									</td>
 									<td>
-										<h5>128mm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Висота</h5>
-									</td>
-									<td>
-										<h5>508mm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Глибина</h5>
-									</td>
-									<td>
-										<h5>85mm</h5>
+										<h5>{{ single_object.length_cm }} см.</h5>
 									</td>
 								</tr>
 								<tr>
@@ -125,95 +128,17 @@
 										<h5>Вага</h5>
 									</td>
 									<td>
-										<h5>52gm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Фіксування</h5>
-									</td>
-									<td>
-										<h5>Професійна</h5>
+										<h5>{{ single_object.length_cm }} гр.</h5>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="comment_list">
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="{% static 'img/product/review-1.png' %}" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Олександр Петров</h4>
-											<h5>12 Лютого, 2022 в 05:56</h5>
-										</div>
-									</div>
-									<p>Я дуже задоволений своїм новим взуттям! Воно дуже комфортне і зручне, а також виглядає дуже елегантно. Я буду носити його на роботі і на вихідних. Я спеціально вибрав це взуття, тому що воно має добре запатентовану підошву, яка допомагає уникнути затирання та додає додаткового комфорту під час ходьби. Я дуже рекомендую це взуття іншим.</p>
-								</div>
-								<div class="review_item reply">
-									<div class="media">
-										<div class="d-flex">
-											<img src="{% static 'img/product/review-2.png' %}" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Іван Сидоренко</h4>
-											<h5>3 Червня, 2022 в 15:35</h5>
-										</div>
-									</div>
-									<p>Я купив це взуття для марафону і їхня якість мене дуже здивувала. Вони дуже легкі, стійкі і зручні для бігу. Я носив їх на марафоні і вони допомогли мені завершити його з мінімумом більшої напруги на ногах. Я рекомендую їх всім бігунам, які шукають комфортне та стійке взуття для бігу.</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="{% static 'img/product/review-3.png' %}" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Микола Гончар</h4>
-											<h5>22 Жовтня, 2023 в 12:22</h5>
-										</div>
-									</div>
-									<p>Я дуже задоволений взуттям для баскетболу, яке мені довелося використовувати на тренуванні. Воно дуже комфортне, легке і дозволяє добре чувати хід гри. Стабільність і тривалість також на високому рівні. Я рекомендую це взуття для будь-якого, хто серйозно займається баскетболом.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="review_box">
-								<h4>Залишити коментар</h4>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="ПІБ">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Пошта">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Номер">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Коментар"></textarea>
-										</div>
-									</div>
-									<div class="col-md-12 text-right">
-										<button type="submit" value="submit" class="btn primary-btn">Відправити</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+
+{#                #TODO END CODE#}
+
+
 				<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
 					<div class="row">
 						<div class="col-lg-6">

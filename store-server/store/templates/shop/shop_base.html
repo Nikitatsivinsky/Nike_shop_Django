@@ -24,13 +24,13 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
                         <div class="single-related-product d-flex">
                            <div class="single-related-product__img">
-                                <a href="{% url 'single_product' id=shoes.subject.id %}">
+                                <a href="{% url 'single_product' uuid=shoes.subject.id %}">
                                     <img src="{{ shoes.subject.image.url}}" alt=""
                                 width="70" height="70">
                                 </a>
                            </div>
                             <div class="desc">
-                                <a href="{% url 'single_product' id=shoes.subject.id %}" class="title">
+                                <a href="{% url 'single_product' uuid=shoes.subject.id %}" class="title">
                                     {{ shoes.subject.name }} {{ shoes.subject.model }}
                                 </a>
                                 <div class="price">

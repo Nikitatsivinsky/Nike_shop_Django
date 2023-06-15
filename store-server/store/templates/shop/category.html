@@ -170,19 +170,20 @@
 					<!-- Start Filter Bar -->
 					<div class="filter-bar d-flex flex-wrap align-items-center justify-content-between">
 						<div class="sorting">
-                            <form id="sorting-form" method="GET" action="{% url 'category' %}">
-                                <select name="sort_by" id="sort-by-select">
+                            <form id="sorting-form" method="GET" action="{% url 'category' %}?sort_by=value">
+                                <select name="sort_by" id="sort-by-select" onchange="this.form.submit()">
                                     <option value="popular">Найпопулярніші</option>
                                     <option value="cheap">Від дешевих до дорогих</option>
                                     <option value="expensive">Від дорогих до дешевих</option>
                                     <option value="discounts">Знижки</option>
                                 </select>
-                          </form>
+{#                                <button type="submit">Застосувати</button>#}
+                            </form>
 						</div>
-{#                    !TODO я сделал все ендпоинты сделай так что-бы они автоматически отправлялись (через http://127.0.0.1:8000/category/?sort_by=popular)#}
+
+{#                    !TODO Багфикс сортировок#}
 
 						<div class="pagination">
-
                             {% if has_previous %}
 							<a href="?page={{ previous_page_number }}" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                             {% endif %}
@@ -225,8 +226,10 @@
 								<div class="single-product">
 									<img class="img-fluid" src="{{ item.image.url }}" alt="">
 									<div class="product-details" >
-										<h6>{{ item.name }}
-										<br> {{ item.model }}</h6>
+                                        <a href="{% url 'single_product' uuid=item.id %}" class="social-info">
+                                                <h6>{{ item.name }}
+                                            <br> {{ item.model }}</h6>
+										</a>
 									<div class="price">
                                         {% if item.discount is None %}
                                             <h6>{{ item.price }}</h6>
@@ -240,7 +243,8 @@
 											<span class="ti-bag"></span>
 											<p class="hover-text">Кошик</p>
 										</a>
-										<a href="{% url 'single_product' id=item.id %}" class="social-info">
+                                        item.uuid
+										<a href="{% url 'single_product' uuid=item.id %}" class="social-info">
 											<span class="lnr lnr-move"></span>
 											<p class="hover-text">Подробиці</p>
 											</a>

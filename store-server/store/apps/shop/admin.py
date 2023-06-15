@@ -1,5 +1,4 @@
-from apps.shop.models import Item, Application, Brand, Category, Color, Gender, Material, Type, Size, SubCategory, \
-    MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner
+from .models import Item, Application, Brand, Category, Color, Gender, Material, Type, Size, SubCategory,ImagesItem
 from django.contrib import admin
 
 
@@ -17,9 +16,10 @@ admin.site.register(Color)
 admin.site.register(Gender)
 admin.site.register(Material)
 admin.site.register(Type)
-admin.site.register(MainBanner)
-admin.site.register(NewesBanner)
-admin.site.register(SaleBanner)
-admin.site.register(ExclusiveBanner)
-admin.site.register(PopularBanner)
+# admin.site.register(MainBanner)
+# admin.site.register(NewesBanner)
+# admin.site.register(SaleBanner)
+# admin.site.register(ExclusiveBanner)
+# admin.site.register(PopularBanner)
+admin.site.register(ImagesItem)
 
