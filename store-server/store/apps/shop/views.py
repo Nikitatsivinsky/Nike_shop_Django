@@ -5,14 +5,16 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
 from apps.auth.models import MailDistribution
-from .forms import SubscribeForm, ItemFiltrationForm
+from .forms import SubscribeForm, ItemFiltrationForm, ItemReviewForm
 from django.contrib import messages
+from django.db.models import Avg, Count
 from django.http import HttpResponseRedirect
 
 from django.views.generic import TemplateView, ListView
 from django.views.generic.list import MultipleObjectMixin
 from apps.other.models import MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner
-from .models import Item, Category, SubCategory, Color, Brand, Gender, Material, Application, Type, Size, ImagesItem
+from .models import Item, Category, SubCategory, Color, Brand, Gender, Material, Application, Type, Size, ImagesItem, StatisticItem
+from apps.auth.models import Profile
 from django.db.utils import IntegrityError
 
 
@@ -227,14 +229,12 @@ class CategoryView(MyBaseView):
         if price_to:
             queryset = queryset.filter(price__lte=price_to)
 
-        #TODO sort_by cheap, sort_by expensive
-
         if sort_by == 'popular':
             queryset = queryset.order_by('-famous')
         elif sort_by == 'cheap':
-            queryset = queryset.order_by('price')
+            queryset = queryset.order_by('-discount', 'price')
         elif sort_by == 'expensive':
-            queryset = queryset.order_by('-price')
+            queryset = queryset.order_by('discount', '-price')
         elif sort_by == 'discounts':
             queryset = queryset.exclude(discount__isnull=True).order_by('discount')
         else:
@@ -255,6 +255,7 @@ class CategoryView(MyBaseView):
         context['materials'] = Material.objects.all()
         context['item_form'] = ItemFiltrationForm()
         context['types'] = Type.objects.all()
+
 
         discount_items = self.queryset.filter(discount__isnull=False).values_list('discount', flat=True)
         price_items = self.queryset.values_list('price', flat=True)
@@ -340,20 +341,45 @@ class SingleProductView(MyBaseView):
         context['single_object'] = self.queryset.first()
         context['applications'] = context['single_object'].applications.all()
         context['item_images'] = ImagesItem.objects.filter(entity_id=uuid).all()
-        print(context)
-
+        statistic = StatisticItem.objects.filter(item_id=uuid)
+        context['average_stars'] = statistic.aggregate(average_grade=Avg('user_grade'))['average_grade']
+        context['average_comments'] = statistic.filter(item_id=uuid).aggregate(average_comment=Count('user_comment'))['average_comment']
+        context['average_stars_1'] = statistic.filter(item_id=uuid, user_grade=1).count()
+        context['average_stars_2'] = statistic.filter(item_id=uuid, user_grade=2).count()
+        context['average_stars_3'] = statistic.filter(item_id=uuid, user_grade=3).count()
+        context['average_stars_4'] = statistic.filter(item_id=uuid, user_grade=4).count()
+        context['average_stars_5'] = statistic.filter(item_id=uuid, user_grade=5).count()
+        context['statistic_item'] = statistic.all()
+        context['form'] = ItemReviewForm()
+        context.update({'subscribe_form': SubscribeForm()})
         return context
 
+    def post(self, request, *args, **kwargs):
 
+        form_review = ItemReviewForm(data=request.POST)
+        if form_review.is_valid():
+            uuid = kwargs['uuid']
+            stars = request.POST['stars']
+            message = request.POST['message']
+            try:
+                if request.user:
+                    statistic_item_model = StatisticItem()
+                    statistic_item_model.user = Profile.objects.filter(user_id=request.user.id).first()
+                    statistic_item_model.item = Item.objects.filter(id=uuid).first()
+                    statistic_item_model.user_comment = message
+                    statistic_item_model.user_grade = stars
+                    statistic_item_model.save()
+                    messages.add_message(request, messages.INFO, 'Ви залишили свій відгук!')
+                else:
+                    messages.add_message(request, messages.INFO, 'Авторизуйтесь будь ласка!')
+            except IntegrityError:
+                StatisticItem.objects.filter(user=Profile.objects.filter(user_id=request.user.id).first(),
+                                             item=Item.objects.filter(id=uuid).first()).update(
+                                            user_comment=message,
+                                            user_grade=stars)
+                messages.add_message(request, messages.INFO, 'Ваш відгук успішно оновленний!')
+            finally:
+                return self.get(request, *args, **kwargs)
 
+        return super().post(request, *args, **kwargs)
 
-
-# def category(request):
-#     context = {}
-#     context.update(get_famous_dict())
-#     context.update({'subscribe_form': SubscribeForm()})
-#     return render(request, 'shop/category.html', context)  # need to give context, not just famous_dict
-
-
-# def single_product(request):
-#     return render(request, 'shop/single-product.html', get_famous_dict())  # need to give context, not just famous_dict

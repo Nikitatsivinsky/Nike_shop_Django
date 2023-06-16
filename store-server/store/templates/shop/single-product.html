@@ -146,116 +146,132 @@
 								<div class="col-6">
 									<div class="box_total">
 										<h5>Загалом</h5>
-										<h4>4.8</h4>
-										<h6>(03 Комнтарі)</h6>
+                                        {% if average_stars == None %}
+                                            <h4 style="font-size: 20px;">Будь першим!</h4>
+                                        {% else %}
+										<h4>{{ average_stars }}</h4>
+                                        {% endif %}
+										<h6>({{ average_comments }} Комнтарі)</h6>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="rating_list">
-										<h3>Сформовано з 3 відгуків</h3>
+										<h3>Сформовано з {{ average_comments }} відгуків</h3>
 										<ul class="list">
 											<li><a href="#">5 зірок <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 02</a></li>
+													 class="fa fa-star"></i><i class="fa fa-star"></i> {{ average_stars_5 }}</a></li>
 											<li><a href="#">4 зірки <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">3 зірки <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
-											<li><a href="#">2 зірки <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
-											<li><a href="#">1 зірка <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
+													 class="fa fa-star"></i> {{ average_stars_4 }}</a></li>
+											<li><a href="#">3 зірки <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                                     {{ average_stars_3 }}</a></li>
+											<li><a href="#">2 зірки <i class="fa fa-star"></i><i class="fa fa-star"></i> {{ average_stars_2 }}</a></li>
+											<li><a href="#">1 зірка <i class="fa fa-star"></i> {{ average_stars_1 }}</a></li>
 										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="review_list">
+                                {% for statistic in statistic_item %}
 								<div class="review_item">
 									<div class="media">
 										<div class="d-flex">
-											<img src="{% static 'img/product/review-1.png' %}" alt="">
+                                            {% if statistic.user.photo %}
+											<img src="{{ statistic.user.photo }}" alt="">
+                                            {% else %}
+                                            <img src="{% static '/img/profile/user-comments.png' %}" alt="">
+                                            {% endif %}
 										</div>
 										<div class="media-body">
-											<h4>Олександр Петров</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
+											<h4>{{ statistic.user}}</h4>
+                                             {{ statistic.user_grade }}
 											<i class="fa fa-star"></i>
 										</div>
 									</div>
-									<p>Я дуже задоволений своїм новим взуттям! Воно дуже комфортне і зручне, а також виглядає дуже елегантно. Я буду носити його на роботі і на вихідних. Я спеціально вибрав це взуття, тому що воно має добре запатентовану підошву, яка допомагає уникнути затирання та додає додаткового комфорту під час ходьби. Я дуже рекомендую це взуття іншим.</p>
+									<p>{{ statistic.user_comment }}</p>
 								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="{% static 'img/product/review-2.png' %}" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Іван Сидоренко</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Я купив це взуття для марафону і їхня якість мене дуже здивувала. Вони дуже легкі, стійкі і зручні для бігу. Я носив їх на марафоні і вони допомогли мені завершити його з мінімумом більшої напруги на ногах. Я рекомендую їх всім бігунам, які шукають комфортне та стійке взуття для бігу.</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="{% static 'img/product/review-3.png' %}" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Микола Гончар</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Я дуже задоволений взуттям для баскетболу, яке мені довелося використовувати на тренуванні. Воно дуже комфортне, легке і дозволяє добре чувати хід гри. Стабільність і тривалість також на високому рівні. Я рекомендую це взуття для будь-якого, хто серйозно займається баскетболом.</p>
-								</div>
+                                {% endfor %}
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="review_box">
+
+                                {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                            <li{% if message.tags %} class="{{ message.tags }}" style="font-size: 20px; font-weight: bold;"{% endif %}>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                {% else %}
 								<h4>Залишити відгук</h4>
-								<p>Ваша оцінка:</p>
-								<ul class="list">
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-								</ul>
-								<p>зірок</p>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="ПІБ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ПІБ'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Пошта" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пошта'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Номер" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Номер'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Відгук" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Відгук'"></textarea></textarea>
-										</div>
-									</div>
-									<div class="col-md-12 text-right">
-										<button type="submit" value="submit" class="primary-btn">Відправити</button>
-									</div>
-								</form>
+                                <h6>(Лише для авторізованих користувачів)</h6>
+                                <form class="row contact_form" action="{% url 'single_product' uuid=single_object.id %}" method="post" id="contactForm" novalidate="novalidate">
+                                  {% csrf_token %}
+                                  <div class="col-md-12">
+                                    <label for="stars">Ваша оцінка <i class="fa fa-star"></i> :</label>
+                                    {{ form.stars }}
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                      {{ form.message }}
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12 text-right">
+                                    <button type="submit" value="submit" class="primary-btn">Відправити</button>
+                                  </div>
+                                </form>
+                                {% endif %}
+
+
+{#								<p>Ваша оцінка:</p>#}
+{#								<ul class="list">#}
+{#									<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#									<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#									<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#									<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#									<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#								</ul>#}
+{#								<p>зірок</p>#}
+
+{#								<form class="row contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">#}
+{#									<div class="col-md-12">#}
+{#										<div class="form-group">#}
+{#											<input type="text" class="form-control" id="name" name="name" placeholder="ПІБ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ПІБ'">#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="col-md-12">#}
+{#										<div class="form-group">#}
+{#											<input type="email" class="form-control" id="email" name="email" placeholder="Пошта" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пошта'">#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="col-md-12">#}
+{#										<div class="form-group">#}
+{#											<input type="text" class="form-control" id="number" name="number" placeholder="Номер теоефону" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Номер'">#}
+{#										</div>#}
+{#									</div>#}
+{#                                    <label for="stars">Ваша оцінка:</label>#}
+{#                                    <div class="col-md-12">#}
+{#                                        <label for="stars">Ваша оцінка <i class="fa fa-star"></i> :</label>#}
+{#                                            <select id="stars" name="stars">#}
+{#                                                <option value="1">1</option>#}
+{#                                                <option value="2">2</option>#}
+{#                                                <option value="3">3</option>#}
+{#                                                <option value="4">4</option>#}
+{#                                                <option value="5">5</option>#}
+{#                                            </select>#}
+{#                                    </div>#}
+{#									<div class="col-md-12">#}
+{#										<div class="form-group">#}
+{#											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Відгук" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Відгук'"></textarea></textarea>#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="col-md-12 text-right">#}
+{#										<button type="submit" value="submit" class="primary-btn">Відправити</button>#}
+{#									</div>#}
+{#								</form>#}
+
+
+
+
 							</div>
 						</div>
 					</div>

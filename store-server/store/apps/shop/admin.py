@@ -1,4 +1,4 @@
-from .models import Item, Application, Brand, Category, Color, Gender, Material, Type, Size, SubCategory,ImagesItem
+from .models import Item, Application, Brand, Category, Color, Gender, Material, Type, Size, SubCategory, ImagesItem, StatisticItem
 from django.contrib import admin
 
 
@@ -16,6 +16,7 @@ admin.site.register(Color)
 admin.site.register(Gender)
 admin.site.register(Material)
 admin.site.register(Type)
+admin.site.register(StatisticItem)
 # admin.site.register(MainBanner)
 # admin.site.register(NewesBanner)
 # admin.site.register(SaleBanner)

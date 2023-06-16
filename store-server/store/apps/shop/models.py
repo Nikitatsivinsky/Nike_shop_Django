@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from apps.auth.models import Profile
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
@@ -157,6 +158,24 @@ class ImagesItem(models.Model):
         db_table = 'imageitem'
         verbose_name = 'Фотографія товару'
         verbose_name_plural = 'Фотографії товарів'
+
+
+class StatisticItem(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Користувач')
+    item = models.ForeignKey(Item, related_name='user_statistic', null=True, blank=True, on_delete=models.CASCADE)
+    user_comment = models.TextField(verbose_name='Коментар')
+    user_grade = models.IntegerField(verbose_name='Оцінка')
+
+    def __str__(self):
+        return f'{self.item} - {self.user}'
+
+
+
+    class Meta:
+        db_table = 'statistic_item'
+        verbose_name = 'Статистика товару'
+        verbose_name_plural = 'Статистика товарів'
+        unique_together = ['user', 'item']
 
 
 # class MainBanner(models.Model):
