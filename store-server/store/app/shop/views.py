@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
-from apps.auth.models import MailDistribution
+from app.users.models import MailDistribution
 from .forms import SubscribeForm, ItemFiltrationForm, ItemReviewForm
 from django.contrib import messages
 from django.db.models import Avg, Count
@@ -12,11 +12,13 @@ from django.http import HttpResponseRedirect
 
 from django.views.generic import TemplateView, ListView
 from django.views.generic.list import MultipleObjectMixin
-from apps.other.models import MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner
+from app.other.models import MainBanner, NewesBanner, SaleBanner, ExclusiveBanner, PopularBanner
 from .models import Item, Category, SubCategory, Color, Brand, Gender, Material, Application, Type, Size, ImagesItem, StatisticItem
-from apps.auth.models import Profile
 from django.db.utils import IntegrityError
-
+from app.users.models import CustomUser
+# from django.contrib.auth import get_user_model
+#
+# CustomUser = get_user_model()
 
 
 def get_model(name: str, app='shop'):
@@ -364,7 +366,7 @@ class SingleProductView(MyBaseView):
             try:
                 if request.user:
                     statistic_item_model = StatisticItem()
-                    statistic_item_model.user = Profile.objects.filter(user_id=request.user.id).first()
+                    statistic_item_model.user = CustomUser.objects.filter(user_id=request.user.id).first()
                     statistic_item_model.item = Item.objects.filter(id=uuid).first()
                     statistic_item_model.user_comment = message
                     statistic_item_model.user_grade = stars
@@ -373,7 +375,7 @@ class SingleProductView(MyBaseView):
                 else:
                     messages.add_message(request, messages.INFO, 'Авторизуйтесь будь ласка!')
             except IntegrityError:
-                StatisticItem.objects.filter(user=Profile.objects.filter(user_id=request.user.id).first(),
+                StatisticItem.objects.filter(user=CustomUser.objects.filter(user_id=request.user.id).first(),
                                              item=Item.objects.filter(id=uuid).first()).update(
                                             user_comment=message,
                                             user_grade=stars)
@@ -382,4 +384,3 @@ class SingleProductView(MyBaseView):
                 return self.get(request, *args, **kwargs)
 
         return super().post(request, *args, **kwargs)
-

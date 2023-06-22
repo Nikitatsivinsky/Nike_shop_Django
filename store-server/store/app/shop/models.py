@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from apps.auth.models import Profile
+from app.users.models import CustomUser
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
@@ -161,7 +161,7 @@ class ImagesItem(models.Model):
 
 
 class StatisticItem(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Користувач')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Користувач')
     item = models.ForeignKey(Item, related_name='user_statistic', null=True, blank=True, on_delete=models.CASCADE)
     user_comment = models.TextField(verbose_name='Коментар')
     user_grade = models.IntegerField(verbose_name='Оцінка')

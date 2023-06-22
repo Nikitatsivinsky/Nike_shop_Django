@@ -1,6 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.auth.models import User
-from apps.shop.models import Item
+from app.shop.models import Item
+
+User = get_user_model()
 
 
 class Cart(models.Model):

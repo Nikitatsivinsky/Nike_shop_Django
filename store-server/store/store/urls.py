@@ -18,14 +18,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-# import apps.shop.views as shop
-import apps.auth.views as auth
-import apps.orders.views as orders
-import apps.other.views as other
+# import app.shop.views as shop
+import app.users.views as auth
+import app.orders.views as orders
+import app.other.views as other
 
 urlpatterns = [
     path("admin/", admin.site.urls, name='admin'),
-    path('', include('apps.shop.urls')),
+    path('', include('app.shop.urls')),
     path('cart/', orders.cart, name='basket'),
     # path('category/', shop.category, name='category'),
     path('checkout/', auth.checkout, name='checkout'),

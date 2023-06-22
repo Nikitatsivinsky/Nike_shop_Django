@@ -1,5 +1,5 @@
 from django import forms
-from apps.auth.models import MailDistribution
+from app.users.models import MailDistribution
 
 
 class SubscribeForm(forms.Form):

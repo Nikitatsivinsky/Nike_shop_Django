@@ -1,5 +1,5 @@
 from django.db import models
-from apps.shop.models import Item
+from app.shop.models import Item
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
