@@ -123,61 +123,41 @@
               id="navbarSupportedContent"
             >
               <ul class="nav navbar-nav menu_nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a
                     class="nav-link"
                     href="{% url 'index' %}"
                     >Головна</a
                   >
                 </li>
-                <li class="nav-item submenu dropdown">
+
+                <li class="nav-item">
                   <a
-                    href=""
-                    class="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    class="nav-link"
+                    href="{% url 'category' %}"
                     >Магазин</a
                   >
-                  <ul class="dropdown-menu">
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        href="{% url 'category' %}"
-                        >Всі товари</a
-                      >
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-{#                        href="{% url 'single_product' %}"#}
-                        >Деталі продукта</a
-                      >
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        href="{% url 'checkout' %}"
-                        >Форма покупки</a
-                      >
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        href="{% url 'basket' %}"
-                        >Кошик</a
-                      >
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        href="{% url 'conformation' %}"
-                        >Підтвердження заказу</a
-                      >
-                    </li>
-                  </ul>
                 </li>
+{#                <li class="nav-item submenu dropdown">#}
+{#                  <a#}
+{#                    href=""#}
+{#                    class="nav-link dropdown-toggle"#}
+{#                    data-toggle="dropdown"#}
+{#                    role="button"#}
+{#                    aria-haspopup="true"#}
+{#                    aria-expanded="false"#}
+{#                    >Магазин</a#}
+{#                  >#}
+{#                  <ul class="dropdown-menu">#}
+{#                    <li class="nav-item">#}
+{#                      <a#}
+{#                        class="nav-link"#}
+{#                        href="{% url 'category' %}"#}
+{#                        >Всі товари</a#}
+{#                      >#}
+{#                    </li>#}
+{#                  </ul>#}
+{#                </li>#}
 
                 <li class="nav-item">
                   <a
@@ -199,6 +179,34 @@
                     >Сторінки</a
                   >
                   <ul class="dropdown-menu">
+                        <li class="nav-item">
+                      <a
+                        class="nav-link"
+{#                        href="{% url 'single_product' %}"#}
+                        >Деталі продукта</a
+                      >
+                    </li>
+                        <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        href="{% url 'checkout' %}"
+                        >Форма покупки</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        href="{% url 'basket' %}"
+                        >Кошик</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        href="{% url 'conformation' %}"
+                        >Підтвердження заказу</a
+                      >
+                    </li>
                     <li class="nav-item">
                       <a
                         class="nav-link"
