@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
                                  null=True, blank=True)
     country = models.CharField(max_length=20, verbose_name='Країна', null=True, blank=True)
     city = models.CharField(max_length=20, verbose_name='Місто', null=True, blank=True)
-    adress = models.CharField(max_length=20, verbose_name='Адреса', null=True, blank=True)
+    address = models.CharField(max_length=20, verbose_name='Адреса', null=True, blank=True)
     zip_code = models.CharField(max_length=20, verbose_name='Індекс', null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True, verbose_name='Дата народження')
     photo = models.ImageField(upload_to='users_image/', verbose_name='Фото', null=True, blank=True)
