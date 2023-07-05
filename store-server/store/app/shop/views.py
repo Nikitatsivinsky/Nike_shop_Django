@@ -64,7 +64,6 @@ class MyBaseView(ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        print('inside MyBaseView')
         form_subcribe = SubscribeForm(data=request.POST)
         if form_subcribe.is_valid():
             email = request.POST['email']

@@ -32,11 +32,11 @@ urlpatterns = [
     path('confirmation/', orders.confirmation, name='conformation'),
     path('contact/', other.contact, name='contact'),
     path('elements/', other.elements, name='elements'),
-    path('login/', auth.login, name='login'),
+    path('user/', include('app.users.urls')),
     # path('single-product/', shop.single_product, name='single_product'),
     path('tracking/', orders.tracking, name='tracking'),
-    path('registration/', auth.registration, name='registration'),
-    path('profile/', auth.profile, name='profile'),
+    # path('registration/', auth.registration, name='registration'),
+    # path('profile/', auth.profile, name='profile'),
 ]
 
 # add url for site_images folder
