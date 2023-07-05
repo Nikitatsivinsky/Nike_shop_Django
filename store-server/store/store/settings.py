@@ -133,3 +133,12 @@ MEDIA_URL = '/site_images/'
 
 MAX_BANNER_COUNT = 8
 MAX_POPULAR_BANNER_COUNT = 9
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.ukr.net'
+EMAIL_PORT = 2525
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView
@@ -22,6 +22,8 @@ User = get_user_model()
 def checkout(request):
     return render(request, 'user/checkout.html')
 
+def login_redirect(request):
+    return redirect('login')
 
 class MyLoginView(LoginView):
     template_name = 'user/register.html'
