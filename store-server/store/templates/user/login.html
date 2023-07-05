@@ -1,0 +1,64 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Вход/Реєстрація</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Головна<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Вход/Реєстрація</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<img class="img-fluid" src="{% static 'img/login.jpg'%}" alt="">
+						<div class="hover">
+							<h4>Новий на нашому сайті?</h4>
+							<p>Наука й технології досягають прогресу щодня, і гарним прикладом цього є</p>
+							<a class="primary-btn" href="/registration">Реєстрація Аккаунту</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Увійти до облікового запису</h3>
+						<form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Логін" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+							<div class="col-md-12 form-group">
+								<div class="creat_account">
+									<input type="checkbox" id="f-option2" name="selector">
+									<label for="f-option2">Залишити мене в системі</label>
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Вход</button>
+								<a href="">Забули пароль?</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+{% endblock %}
