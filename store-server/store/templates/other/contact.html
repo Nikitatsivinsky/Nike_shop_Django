@@ -4,6 +4,20 @@
 
 {% block page_content %}
 
+{#    <style>#}
+{#      /* Always set the map height explicitly to define the size of the div#}
+{#       * element that contains the map. */#}
+{#      #map {#}
+{#        height: 100%;#}
+{#      }#}
+{#      /* Optional: Makes the sample page fill the window. */#}
+{#      html, body {#}
+{#        height: 100%;#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#      }#}
+{#    </style>#}
+
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
@@ -23,9 +37,10 @@
 	<!--================Contact Area =================-->
 	<section class="contact_area section_gap_bottom">
 		<div class="container">
-			<div id="mapBox" class="mapBox" data-lat="50.44633363785269" data-lon="30.520903340805795" data-zoom="13" data-info="Kyiv, Ukraine"
-			 data-mlat="40.701083" data-mlon="-74.1522848">
-			</div>
+            <div id="map"  class="mapBox"></div>
+{#			<div id="mapBox" class="mapBox" data-lat="50.44633363785269" data-lon="30.520903340805795" data-zoom="13" data-info="Kyiv, Ukraine"#}
+{#			 data-mlat="40.701083" data-mlon="-74.1522848">#}
+{#			</div>#}
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="contact_info">
@@ -72,6 +87,19 @@
 			</div>
 		</div>
 	</section>
+
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 50.44633363785269, lng: 30.520903340805795},
+          zoom: 13
+        });
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v5.9/mapsJavaScriptAPI.js"
+    async defer></script>
+
 	<!--================Contact Area =================-->
 
 	<!--================Contact Success and Error message Area =================-->
