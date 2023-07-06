@@ -12,6 +12,8 @@ class CustomUser(AbstractUser):
     zip_code = models.CharField(max_length=20, verbose_name='Індекс', null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True, verbose_name='Дата народження')
     photo = models.ImageField(upload_to='users_image/', verbose_name='Фото', null=True, blank=True)
+    is_email_confirmed = models.BooleanField(default=False)
+    remember_me = models.BooleanField(default=False)
 
     def __str__(self):
         if self.first_name or self.last_name:

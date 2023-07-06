@@ -139,6 +139,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.ukr.net'
 EMAIL_PORT = 2525
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'nike_shop@ukr.net'
+EMAIL_HOST_PASSWORD = '3U2PjHxo3peHAdzz'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Time user session
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30

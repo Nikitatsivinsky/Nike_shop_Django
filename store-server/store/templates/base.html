@@ -302,6 +302,7 @@
                   {% endif %}
                   </ul>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a
                     href="{% url 'basket' %}"
@@ -309,6 +310,7 @@
                     ><span class="ti-bag"></span
                   ></a>
                 </li>
+                {% endif %}
                 {% comment %}
                 <li class="nav-item">
                   <button class="search">

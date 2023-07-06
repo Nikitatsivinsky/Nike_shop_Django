@@ -3,17 +3,28 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy, reverse
-from .forms import UserRegistrationForm, UserProfileForm, ChangePasswordForm
+from .forms import UserRegistrationForm, UserProfileForm, ChangePasswordForm, UserLoginForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth import authenticate, login
 from django.views.generic.edit import FormMixin
 
 # photo
 import io
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
+# Confirm email
+from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.shortcuts import redirect, get_object_or_404
+# Reset password
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+# user session remember_me
+from django.contrib.sessions.backends.db import SessionStore
 
 User = get_user_model()
 
@@ -25,10 +36,64 @@ def checkout(request):
 def login_redirect(request):
     return redirect('login')
 
+def confirm_email(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    user.is_email_confirmed = True
+    user.save()
+
+    return redirect(f'/')
+
+from django.contrib.auth.hashers import check_password
 class MyLoginView(LoginView):
     template_name = 'user/register.html'
     redirect_authenticated_user = False
     next_page = '/'
+    form_class = UserLoginForm
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        remember_me = self.request.POST.get('remember_me', False)
+
+        # Аутентификация пользователя по имени пользователя или адресу электронной почты и паролю
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+
+            if not user.is_email_confirmed:
+                messages.error(self.request, "Пожалуйста, подтвердите свою почту для авторизации.")
+                return self.form_invalid(form)
+
+            if remember_me == 'on':
+                session = SessionStore()
+                session.set_expiry(None)
+                user.remember_me = True
+                user.save()
+                self.request.session = session
+            else:
+                if 'remember_me' in self.request.session:
+                    del self.request.session['remember_me']
+                    self.request.session.modified = True
+
+            login(self.request, user)
+            return super().form_valid(form)
+
+        # Если пользователь не найден, отобразить ошибку
+        messages.error(self.request, "Неверное имя пользователя, адрес электронной почты или пароль.")
+        return super().form_invalid(form)
+
+    def form_invalid(self, form):
+
+        for errors in form.errors.items():
+            for error_message in errors[1]:
+                messages.error(self.request, error_message)
+        return super().form_invalid(form)
+
+# class MyLoginView(LoginView):
+#     template_name = 'user/register.html'
+#     redirect_authenticated_user = False
+#     next_page = '/'
 
 
 class RegistrationView(FormView):
@@ -44,13 +109,9 @@ class RegistrationView(FormView):
 
     def form_valid(self, form):
         password1 = form.cleaned_data['password1']
-        password2 = form.data['password2']
+        # password2 = form.data['password2']
         email = form.data['email']
         username = form.cleaned_data['username']
-
-        if password1 != password2:
-            messages.error(self.request, "Паролі не співпадають.")
-            return self.form_invalid(form)
 
         email_in_db = User.objects.filter(email=email).exists()
         login_in_db = User.objects.filter(username=username).exists()
@@ -63,7 +124,10 @@ class RegistrationView(FormView):
             return self.form_invalid(form)
 
         if self.register_new_user(username, email, password1):
-            messages.success(self.request, "Ви успішно зареєструвалися!")
+            self.send_confirmation_email()
+            messages.success(self.request, "Ви успішно зареєструвалися! Перевірте свою поштову скриньку для підтвердження реєстрації.")
+            return render(self.request, 'user/popup_template.html', {
+                'message': 'Ви успішно зареєструвалися! Перевірте свою поштову скриньку для підтвердження реєстрації.'})
         else:
             messages.success(self.request, "Відбулася помилка! Спробуйте пізніше!")
         return super().form_valid(form)
@@ -71,11 +135,46 @@ class RegistrationView(FormView):
     def register_new_user(self, username, email, password):
         try:
             user = User.objects.create_user(username=username, email=email, password=password)
-            user.save()
+            self.user = user
             return True
         except Exception as ex:
             print(ex)
             return False
+
+    def send_confirmation_email(self):
+        current_site = get_current_site(self.request)
+        mail_subject = 'Подтверждение регистрации'
+
+        # Генерация ссылки для подтверждения
+        confirmation_link = f"http://{current_site.domain}/user/confirm/{self.user.id}/"
+
+        html_message = render_to_string('user/confirmation_email.html', {
+            'user': self.user,
+            'confirmation_link': confirmation_link,
+        })
+        text_message = strip_tags(html_message)  # Преобразование HTML в текст
+
+        # Создание EmailMultiAlternatives объекта
+        email = EmailMultiAlternatives(
+            mail_subject, text_message, to=[self.user.email]
+        )
+        email.attach_alternative(html_message, "text/html")  # Добавление HTML версии письма
+
+        # Отправка сообщения
+        email.send()
+
+
+        # # Загрузка шаблона электронного сообщения
+        # message = render_to_string('user/confirmation_email.html', {
+        #     'user': self.user,
+        #     'confirmation_link': confirmation_link,
+        # })
+        #
+        # # Отправка сообщения
+        # email = EmailMessage(
+        #     mail_subject, message, to=[self.user.email]
+        # )
+        # email.send()
 
 
 # class RegistrationView(View):
@@ -222,5 +321,18 @@ class ChangePasswordView(PasswordChangeView):
         return super().form_invalid(form)
 
 
-class LogoutView(LogoutView):
+class MyPasswordResetView(PasswordResetView):
+    template_name = 'user/password_reset.html'
+
+
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'user/password_reset_done.html'
+
+class MyPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'user/password_reset_confirm.html'
+
+class MyPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'user/password_reset_complete.html'
+
+class MyLogoutView(LogoutView):
     next_page = '/'

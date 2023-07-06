@@ -37,7 +37,7 @@ urlpatterns = [
     path('tracking/', orders.tracking, name='tracking'),
     # path('registration/', auth.registration, name='registration'),
     # path('profile/', auth.profile, name='profile'),
-    path('accounts/login/', auth.login_redirect, name='login_redirect'),
+    path('accounts/login/', auth.login_redirect, name='login_redirect'), #Удалить TODO
 ]
 
 # add url for site_images folder
