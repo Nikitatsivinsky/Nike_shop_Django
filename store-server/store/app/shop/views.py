@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.apps import apps
 from django.db.models import Q
@@ -350,6 +351,7 @@ class SingleProductView(MyBaseView):
         context['average_stars_3'] = statistic.filter(item_id=uuid, user_grade=3).count()
         context['average_stars_4'] = statistic.filter(item_id=uuid, user_grade=4).count()
         context['average_stars_5'] = statistic.filter(item_id=uuid, user_grade=5).count()
+        context['MEDIA_URL'] = settings.MEDIA_URL
         context['statistic_item'] = statistic.all()
         context['form'] = ItemReviewForm()
         context.update({'subscribe_form': SubscribeForm()})
@@ -365,7 +367,7 @@ class SingleProductView(MyBaseView):
             try:
                 if request.user:
                     statistic_item_model = StatisticItem()
-                    statistic_item_model.user = CustomUser.objects.filter(user_id=request.user.id).first()
+                    statistic_item_model.user = CustomUser.objects.filter(id=request.user.id).first()
                     statistic_item_model.item = Item.objects.filter(id=uuid).first()
                     statistic_item_model.user_comment = message
                     statistic_item_model.user_grade = stars
@@ -374,11 +376,13 @@ class SingleProductView(MyBaseView):
                 else:
                     messages.add_message(request, messages.INFO, 'Авторизуйтесь будь ласка!')
             except IntegrityError:
-                StatisticItem.objects.filter(user=CustomUser.objects.filter(user_id=request.user.id).first(),
+                StatisticItem.objects.filter(user=CustomUser.objects.filter(id=request.user.id).first(),
                                              item=Item.objects.filter(id=uuid).first()).update(
                                             user_comment=message,
                                             user_grade=stars)
                 messages.add_message(request, messages.INFO, 'Ваш відгук успішно оновленний!')
+            except Exception as ex:
+                print(ex)
             finally:
                 return self.get(request, *args, **kwargs)
 
