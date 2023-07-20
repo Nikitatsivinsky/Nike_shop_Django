@@ -123,14 +123,52 @@
               id="navbarSupportedContent"
             >
               <ul class="nav navbar-nav menu_nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a
                     class="nav-link"
                     href="{% url 'index' %}"
                     >Головна</a
                   >
                 </li>
+
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="{% url 'category' %}"
+                    >Магазин</a
+                  >
+                </li>
+{#                <li class="nav-item submenu dropdown">#}
+{#                  <a#}
+{#                    href=""#}
+{#                    class="nav-link dropdown-toggle"#}
+{#                    data-toggle="dropdown"#}
+{#                    role="button"#}
+{#                    aria-haspopup="true"#}
+{#                    aria-expanded="false"#}
+{#                    >Магазин</a#}
+{#                  >#}
+{#                  <ul class="dropdown-menu">#}
+{#                    <li class="nav-item">#}
+{#                      <a#}
+{#                        class="nav-link"#}
+{#                        href="{% url 'category' %}"#}
+{#                        >Всі товари</a#}
+{#                      >#}
+{#                    </li>#}
+{#                  </ul>#}
+{#                </li>#}
+
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="{% url 'contact' %}"
+                    >Контакти</a
+                  >
+                </li>
+
                 <li class="nav-item submenu dropdown">
+                    {% if user.is_superuser or user.is_staff %}
                   <a
                     href=""
                     class="nav-link dropdown-toggle"
@@ -138,24 +176,17 @@
                     role="button"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    >Магазин</a
+                    >Сторінки</a
                   >
                   <ul class="dropdown-menu">
-                    <li class="nav-item">
+                        <li class="nav-item">
                       <a
                         class="nav-link"
-                        href="{% url 'category' %}"
-                        >Всі товари</a
-                      >
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        href="{% url 'single_product' %}"
+{#                        href="{% url 'single_product' %}"#}
                         >Деталі продукта</a
                       >
                     </li>
-                    <li class="nav-item">
+                        <li class="nav-item">
                       <a
                         class="nav-link"
                         href="{% url 'checkout' %}"
@@ -176,20 +207,6 @@
                         >Підтвердження заказу</a
                       >
                     </li>
-                  </ul>
-                </li>
-
-                <li class="nav-item submenu dropdown">
-                  <a
-                    href=""
-                    class="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    >Сторінки</a
-                  >
-                  <ul class="dropdown-menu">
                     <li class="nav-item">
                       <a
                         class="nav-link"
@@ -211,24 +228,19 @@
                         >Елементи (розробка)</a
                       >
                     </li>
+                      {% endif %}
                   </ul>
                 </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    href="{% url 'contact' %}"
-                    >Контакти</a
-                  >
-                </li>
-                  {% if user.is_superuser or user.is_staff %}
-                  <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    href="{% url 'admin:index' %}"
-                    >Адмін</a
-                  >
-                </li>
-                  {% endif %}
+
+{#                  {% if user.is_superuser or user.is_staff %}#}
+{#                  <li class="nav-item">#}
+{#                  <a#}
+{#                    class="nav-link"#}
+{#                    href="{% url 'admin:index' %}"#}
+{#                    >Адмін</a#}
+{#                  >#}
+{#                </li>#}
+{#                  {% endif %}#}
               </ul>
               <ul class="nav navbar-nav menu-nav navbar-right">
                 <li class="nav-item submenu dropdown">
@@ -245,13 +257,15 @@
 
                   <ul class="dropdown-menu dropdown-menu__user">
                     <li class="nav-item">
-                      <!-- <span class="ti-user"></span> -->
+                    {% if not user.is_authenticated %}
                       <a
                         class="nav-link"
-                        href="{% if user.is_authenticated %} {% url 'basket' %} {% else %} {% url 'registration' %} {% endif %}"
+                        href="{% url 'login' %}"
                         >Вхід</a
                       >
+                    {% endif %}
                     </li>
+                  {% if user.is_superuser or user.is_staff %}
                     <li class="nav-item">
                       <a
                         class="nav-link"
@@ -259,11 +273,13 @@
                         >Адмін</a
                       >
                     </li>
+                  {%  endif %}
+                  {% if user.is_authenticated %}
                     <li class="nav-item">
                       <!-- <span class="ti-user"></span> -->
                       <a
                         class="nav-link"
-                        href="{% url 'profile' %}"
+                        href="{% url 'profile' pk=user.id%}"
                         >Мій профіль</a
                       >
                     </li>
@@ -279,12 +295,14 @@
                       <!-- <span class="ti-user"></span> -->
                       <a
                         class="nav-link"
-                        href="{% url 'elements' %}"
+                        href="{% url 'logout' %}"
                         >Вихід</a
                       >
                     </li>
+                  {% endif %}
                   </ul>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a
                     href="{% url 'basket' %}"
@@ -292,6 +310,7 @@
                     ><span class="ti-bag"></span
                   ></a>
                 </li>
+                {% endif %}
                 {% comment %}
                 <li class="nav-item">
                   <button class="search">
@@ -354,6 +373,7 @@
               </p>
             </div>
           </div>
+        {% if subscribe_form %}
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="single-footer-widget">
               <h6>Підписка</h6>
@@ -366,6 +386,8 @@
                         {% endfor %}
                     </ul>
             {% endif %}
+
+
             {% if subscribe_form.non_field_errors %}
                     <ul class="messages">
                         <li class="info" style="font-size: 14px; font-weight: bold;">{{ subscribe_form.non_field_errors }}</li>
@@ -376,7 +398,7 @@
                 id="mc_embed_signup"
               >
                 <form
-                  action="/"
+                  action= "{{ request.build_absolute_uri }}"
                   method="post"
                   class="form-inline"
                 >
@@ -399,6 +421,7 @@
               </div>
             </div>
           </div>
+        {% endif %}
 {#          <div class="col-lg-3 col-md-6 col-sm-6">#}
 {#            <div class="single-footer-widget mail-chimp">#}
 {#              <h6 class="mb-20">Instragram фото</h6>#}
@@ -519,7 +542,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-{#    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>  Этот скрипт делает переадресацию форм, которые я подключаю! Поэтому он вырезан#}
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
     <script src="{% static 'js/nouislider.min.js' %}"></script>
@@ -527,8 +549,9 @@
     <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+{#    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao"></script>#}
     <script src="{% static 'js/gmaps.min.js' %}"></script>
+    <script src="{% static 'js/range-slider.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

@@ -1,0 +1,40 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Підтвердження паролю</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="{% url 'index' %}">Головна<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'login' %}">Вхід</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Tracking Box Area =================-->
+    <section class="tracking_box_area section_gap">
+        <div class="container">
+            <div class="tracking_box_inner">
+
+                <h1>Підтвердження паролю</h1>
+
+                <br> <p> {{ message }} </p>
+
+                <div class="col-md-12 form-group">
+                    <a href="{% url 'index' %}" class="primary-btn">На головну</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!--================End Tracking Box Area =================-->
+
+{% endblock %}
