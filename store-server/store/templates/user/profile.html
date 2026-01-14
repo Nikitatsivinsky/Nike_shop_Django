@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block page_content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
 
 <!-- CONTAINER -->
 <main
@@ -14,27 +16,48 @@
       class="user-profile__form"
       id="user-profile-form"
       method="post"
-      action="#"
+      action="{% url 'profile' pk=user.id%}"
+      enctype="multipart/form-data"
     >
+    {% csrf_token %}
       <div class="user-profile__head">
         <div class="user-profile__img">
           <img
-            src="../../static/img/profile/user.svg"
+            src= "{% if not user.photo %}{% static 'img/profile/user.svg' %} {% else %} {{ MEDIA_URL }}{{ user.photo.url }} {% endif %}"
             width="100"
             height="100"
           />
-          <label class="user-profile__img-label"><input type="file" /></label>
+          <label class="user-profile__img-label" for="user-profile__img">
+              <input
+                      id="user-profile__img"
+                      type="file"
+                      name="photo"
+              />
+          </label>
         </div>
 
         <div class="user-profile__name">
           <label for="user-profile__name">
-            ПІБ*
+            Ім’я та прізвище
             <input
-              name="name"
+              name="first_name"
               id="user-profile__name"
               type="text"
-              placeholder="Ваше прізвище ім’я по-батькові"
+              placeholder="{% if user.first_name %} {{ user.first_name }} {% else %}Ваше ім’я {% endif %}"
+
+              {% if not user.last_name or not user.first_name %}
               required
+              {% endif %}
+            />
+            <input
+              name="last_name"
+              id="user-profile__name"
+              type="text"
+              placeholder="{% if user.last_name %} {{ user.last_name }} {% else %}Ваше прізвище {% endif %}"
+
+              {% if not user.last_name or not user.first_name %}
+              required
+              {% endif %}
             />
           </label>
         </div>
@@ -45,11 +68,10 @@
           <label for="user-profile__birth">
             Дата народження*
             <input
-              name="name"
+              name="birth_date"
               id="user-profile__birth"
-              type="text"
-              placeholder="01.01.1980"
-              required
+              type="date"
+              value="{% if user.birth_date %}{{user.birth_date|date:'Y-m-d'}}{% endif %}"
             />
           </label>
           <label for="user-profile__email">
@@ -58,8 +80,10 @@
               name="email"
               id="user-profile__email"
               type="email"
-              placeholder="mail@blabla.ua"
+              placeholder="{% if user.email %} {{ user.email }} {% else %} example@gmail.com {% endif %}"
+              {% if not user.email %}
               required
+              {% endif %}
             />
           </label>
           <label class="user-profile__city">
@@ -109,11 +133,13 @@
           <label for="user-profile__phone">
             Контактний номер*
             <input
-              name="phone"
+              name="telephone"
               id="user-profile__phone"
               type="tel"
-              placeholder="+38 (011) 222 33 44"
+              placeholder="{% if user.telephone %} +38 {{ user.telephone }} {% else %} +38 (011) 222 33 44 {% endif %}"
+              {% if not user.telephone %}
               required
+              {% endif %}
             />
           </label>
           <label for="user-profile__country">
@@ -172,10 +198,14 @@
           <label for="user-profile__zip-code">
             Поштовий індекс
             <input
-              name="zip-code"
+              name="zip_code"
               id="user-profile__zip-code"
               type="number"
-              placeholder="12345"
+              placeholder="{% if user.zip_code %} {{ user.zip_code }} {% else %} 12345 {% endif %}"
+
+              {% if not user.zip_code %}
+              required
+              {% endif %}
             />
           </label>
         </div>
@@ -188,7 +218,12 @@
             type="text"
             name="address"
             id="user-profile__address"
-            placeholder="Ваша адреса"
+            placeholder="{% if user.address %} {{ user.address }} {% else %} Ваша адреса {% endif %}"
+
+            {% if not user.address %}
+            required
+            {% endif %}
+
           />
         </label>
       </div>
@@ -212,17 +247,24 @@
           >
             Зберегти
           </button>
-          <button
-            class="user-profile__reset"
-            type="reset"
-            name="reset"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Очистити
-          </button>
+            <a class="user-profile__reset" href="{% url 'password' pk=user.id%}">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Змінити пароль
+            </a>
+{#          <button#}
+{#            class="user-profile__reset"#}
+{#            type="reset"#}
+{#            name="reset"#}
+{#          >#}
+{#            <span></span>#}
+{#            <span></span>#}
+{#            <span></span>#}
+{#            <span></span>#}
+{#            Змінити пароль#}
+{#          </button>#}
         </div>
       </div>
     </form>

@@ -99,7 +99,7 @@
                 alt=""
               />
               <a
-                href="{% url 'single_product' %}"
+{#                href="{% url 'single_product' %}"#}
                 class="prd-bottom"
                 target="_blank"
               >
@@ -180,7 +180,7 @@
                   <p class="hover-text">Кошик</p>
                 </a>
                 <a
-                  href="{% url 'single_product' %}"
+{#                  href="{% url 'single_product' %}"#}
                   class="social-info"
                 >
                   <span class="lnr lnr-move"></span>
@@ -220,7 +220,7 @@
             /></a>
 
             <div class="product-details">
-              <h6><a href="#">{{ product.subject.name }} {{ product.subject.model }}</a></h6>
+              <h6><a href="#">{{ product.subject.name }}{{ product.subject.model }}</a></h6>
               <div class="price">
                 <h6>{{ product.subject.discount }}</h6>
                 <h6 class="l-through">{{ product.subject.price }}</h6>
@@ -234,7 +234,7 @@
                   <p class="hover-text">Кошик</p>
                 </a>
                 <a
-                  href="{% url 'single_product' %}"
+{#                  href="{% url 'single_product' %}"#}
                   class="social-info"
                 >
                   <span class="lnr lnr-move"></span>
